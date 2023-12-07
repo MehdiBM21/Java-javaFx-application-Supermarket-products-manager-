@@ -1,0 +1,102 @@
+/*#categorie{
+    -fx-background-color:linear-gradient(to bottom right, #067BC2, #84BCDA);
+    -fx-background-radius: 20;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+}*/
+/* Categorie 1 */
+#background{
+    -fx-background-color: #EDEADE;
+}
+
+/* Categorie 1 */
+#categorie1 {
+    -fx-background-color: linear-gradient(to bottom right, #FF5733, #FFC300);
+    -fx-background-radius: 20;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+}
+
+/* Au survol de la souris pour Categorie 1 */
+#categorie1:hover {
+    -fx-background-color: linear-gradient(to bottom right, #FF8C66, #FFE680);
+    -fx-transition: 0.5s;
+}
+
+/* Categorie 2 */
+#categorie2 {
+    -fx-background-color: linear-gradient(to bottom right, #4CAF50, #8AE43A);
+    -fx-background-radius: 20;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+}
+
+/* Au survol de la souris pour Categorie 2 */
+#categorie2:hover {
+    -fx-background-color: linear-gradient(to bottom right, #6EDD84, #A3F3A1);
+}
+
+/* Categorie 3 */
+#categorie3 {
+    -fx-background-color: linear-gradient(to bottom right, #9B59B6, #D2527F);
+    -fx-background-radius: 20;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+}
+
+/* Au survol de la souris pour Categorie 3 */
+#categorie3:hover {
+    -fx-background-color: linear-gradient(to bottom right, #B583C6, #E095A6);
+}
+
+/* Categorie 4 */
+#categorie4 {
+    -fx-background-color: linear-gradient(to bottom right, #3498DB, #5D8CAE);
+    -fx-background-radius: 20;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+}
+
+/* Au survol de la souris pour Categorie 4 */
+#categorie4:hover {
+    -fx-background-color: linear-gradient(to bottom right, #5FABE1, #8CB4D4);
+}
+
+/* Categorie 5 */
+#categorie5 {
+    -fx-background-color: linear-gradient(to bottom right, #E74C3C, #F1948A);
+    -fx-background-radius: 20;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+}
+
+/* Au survol de la souris pour Categorie 5 */
+#categorie5:hover {
+    -fx-background-color: linear-gradient(to bottom right, #EC7260, #F7BFA4);
+}
+
+/* Categorie 6 */
+#categorie6 {
+    -fx-background-color: linear-gradient(to bottom right, #2E86C1, #3498DB);
+    -fx-background-radius: 20;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+}
+
+/* Au survol de la souris pour Categorie 6 */
+#categorie6:hover {
+    -fx-background-color: linear-gradient(to bottom right, #559CD5, #7AAFD9);
+}
+
+/* Categorie 7 */
+#plus {
+    -fx-background-color: linear-gradient(to bottom right, #27AE60, #58D68D);
+    -fx-background-radius: 20;
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+}
+
+/* Au survol de la souris pour Categorie 7 */
+#plus:hover {
+    -fx-background-color: linear-gradient(to bottom right, #4BB174, #7EDFA6);
+}

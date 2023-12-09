@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import login.DashboardController;
 
 import java.io.IOException;
 
@@ -21,7 +20,7 @@ public class LoginController {
     public void login(ActionEvent event) throws IOException {
         String username = this.username.getText();
         System.out.println(username);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/login/dashboard.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/javafx/dashboard.fxml"));
         root = loader.load();
         DashboardController dashboardController = loader.getController();
         dashboardController.displayName(username);

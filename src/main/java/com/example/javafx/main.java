@@ -18,7 +18,7 @@ public class main extends Application {
         stage.setScene(scene);
         stage.show();*/
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/login/dashboard.fxml"));//creating a root node that dictates how the other nodes will be arranged
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/javafx/dashboard.fxml"));//creating a root node that dictates how the other nodes will be arranged
             Scene scene = new Scene(root);//adding the root to the Scene
             scene.getStylesheets().add(getClass().getResource("/com/example/javafx/style.css").toExternalForm());
             Image icon = new Image(getClass().getResourceAsStream("cart.png"));

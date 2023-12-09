@@ -1,34 +1,32 @@
 /*#categorie{
     -fx-background-color:linear-gradient(to bottom right, #067BC2, #84BCDA);
     -fx-background-radius: 20;
-    -fx-font-family: Arial;
-    -fx-font-weight: bold;
 }*/
 /* Categorie 1 */
 #background{
-    -fx-background-color: #EDEADE;
+    -fx-background-color: #E8E8E8;
 }
 
 /* Categorie 1 */
 #categorie1 {
     -fx-background-color: linear-gradient(to bottom right, #FF5733, #FFC300);
     -fx-background-radius: 20;
-    -fx-font-family: Arial;
-    -fx-font-weight: bold;
 }
 
 /* Au survol de la souris pour Categorie 1 */
 #categorie1:hover {
     -fx-background-color: linear-gradient(to bottom right, #FF8C66, #FFE680);
-    -fx-transition: 0.5s;
+}
+
+/* Au clic de la souris pour Categorie 1 */
+#categorie1:pressed {
+    -fx-background-color: linear-gradient(to bottom right, #FF5733, #FFC300);
 }
 
 /* Categorie 2 */
 #categorie2 {
     -fx-background-color: linear-gradient(to bottom right, #4CAF50, #8AE43A);
     -fx-background-radius: 20;
-    -fx-font-family: Arial;
-    -fx-font-weight: bold;
 }
 
 /* Au survol de la souris pour Categorie 2 */
@@ -36,12 +34,15 @@
     -fx-background-color: linear-gradient(to bottom right, #6EDD84, #A3F3A1);
 }
 
+/* Au clic de la souris pour Categorie 2 */
+#categorie2:pressed {
+    -fx-background-color: linear-gradient(to bottom right, #4CAF50, #8AE43A);
+}
+
 /* Categorie 3 */
 #categorie3 {
     -fx-background-color: linear-gradient(to bottom right, #9B59B6, #D2527F);
     -fx-background-radius: 20;
-    -fx-font-family: Arial;
-    -fx-font-weight: bold;
 }
 
 /* Au survol de la souris pour Categorie 3 */
@@ -49,12 +50,15 @@
     -fx-background-color: linear-gradient(to bottom right, #B583C6, #E095A6);
 }
 
+/* Au clic de la souris pour Categorie 3 */
+#categorie3:pressed {
+    -fx-background-color: linear-gradient(to bottom right, #9B59B6, #D2527F);
+}
+
 /* Categorie 4 */
 #categorie4 {
     -fx-background-color: linear-gradient(to bottom right, #3498DB, #5D8CAE);
     -fx-background-radius: 20;
-    -fx-font-family: Arial;
-    -fx-font-weight: bold;
 }
 
 /* Au survol de la souris pour Categorie 4 */
@@ -62,12 +66,15 @@
     -fx-background-color: linear-gradient(to bottom right, #5FABE1, #8CB4D4);
 }
 
+/* Au clic de la souris pour Categorie 4 */
+#categorie4:pressed {
+    -fx-background-color: linear-gradient(to bottom right, #3498DB, #5D8CAE);
+}
+
 /* Categorie 5 */
 #categorie5 {
     -fx-background-color: linear-gradient(to bottom right, #E74C3C, #F1948A);
     -fx-background-radius: 20;
-    -fx-font-family: Arial;
-    -fx-font-weight: bold;
 }
 
 /* Au survol de la souris pour Categorie 5 */
@@ -75,12 +82,15 @@
     -fx-background-color: linear-gradient(to bottom right, #EC7260, #F7BFA4);
 }
 
+/* Au clic de la souris pour Categorie 5 */
+#categorie5:pressed {
+    -fx-background-color: linear-gradient(to bottom right, #E74C3C, #F1948A);
+}
+
 /* Categorie 6 */
 #categorie6 {
     -fx-background-color: linear-gradient(to bottom right, #2E86C1, #3498DB);
     -fx-background-radius: 20;
-    -fx-font-family: Arial;
-    -fx-font-weight: bold;
 }
 
 /* Au survol de la souris pour Categorie 6 */
@@ -88,15 +98,74 @@
     -fx-background-color: linear-gradient(to bottom right, #559CD5, #7AAFD9);
 }
 
+/* Au clic de la souris pour Categorie 6 */
+#categorie6:pressed {
+    -fx-background-color: linear-gradient(to bottom right, #2E86C1, #3498DB);
+}
+
 /* Categorie 7 */
 #plus {
     -fx-background-color: linear-gradient(to bottom right, #27AE60, #58D68D);
     -fx-background-radius: 20;
-    -fx-font-family: Arial;
-    -fx-font-weight: bold;
 }
 
 /* Au survol de la souris pour Categorie 7 */
 #plus:hover {
     -fx-background-color: linear-gradient(to bottom right, #4BB174, #7EDFA6);
+}
+
+/* Au clic de la souris pour Categorie 7 */
+#plus:pressed {
+    -fx-background-color: linear-gradient(to bottom right, #27AE60, #58D68D);
+}
+
+#sidebar {
+    -fx-background-color: #111B4E;
+}
+#sidebarContainer{
+    /*-fx-alignment: center;*/
+    -fx-spacing: 10;
+}
+/* #home */
+#home {
+    -fx-background-color: #111B4E;
+}
+
+/* Au clic de la souris pour #home */
+#home:pressed {
+    -fx-background-color: #192A56; /* Adjust as needed */
+}
+
+/* #users */
+#users {
+    -fx-background-color: #111B4E;
+}
+
+/* Au clic de la souris pour #users */
+#users:pressed {
+    -fx-background-color: #192A56; /* Adjust as needed */
+}
+
+/* #admin */
+#admin {
+    -fx-background-color: #111B4E;
+}
+
+/* Au clic de la souris pour #admin */
+#admin:pressed {
+    -fx-background-color: #192A56; /* Adjust as needed */
+}
+
+/* #logout */
+#logout {
+    -fx-background-color: #111B4E;
+}
+
+/* Au clic de la souris pour #logout */
+#logout:pressed {
+    -fx-background-color: #192A56; /* Adjust as needed */
+}
+
+#categoriesContainer{
+    -fx-spacing: 10;
 }

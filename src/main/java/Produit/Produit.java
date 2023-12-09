@@ -23,7 +23,7 @@ public class Produit {
         this.date = date;
         this.peremption=peremption;
     }
-    public Produit(int idCategorie, String designation, int qte, double prix, LocalDate date, LocalDate peremption) {
+   public Produit(int idCategorie, String designation, int qte, double prix, LocalDate date, LocalDate peremption) {
         this.id = -1;
         this.idCategorie=idCategorie;
         this.designation = designation;

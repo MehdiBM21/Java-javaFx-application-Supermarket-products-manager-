@@ -1,5 +1,8 @@
 package Produit;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -101,7 +104,32 @@ public class ProduitDaoImpl extends AbstractDao implements IProduitDao {
         }
         return listeProduits;
     }
+    /*public ObservableList<Produit> getAll() {
+        ObservableList<Produit> listeProduits = FXCollections.observableArrayList();
+        try (PreparedStatement pst = connection.prepareStatement("SELECT * FROM produit");
+             ResultSet rs = pst.executeQuery()) {
+            while (rs.next()) {
+                Date dateSql = rs.getDate("date");
+                Date peremptionSql = rs.getDate("peremption");
 
+                Produit produit = new Produit(
+                        rs.getInt("id"),
+                        rs.getInt("idCategorie"),
+                        rs.getString("designation"),
+                        rs.getInt("quantite"),
+                        rs.getDouble("prix"),
+                        dateSql != null ? dateSql.toLocalDate() : null,
+                        peremptionSql != null ? peremptionSql.toLocalDate() : null);
+
+                listeProduits.add(produit);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la récupération de tous les produits");
+            e.printStackTrace();
+        }
+        return listeProduits;
+    }
+*/
     @Override
     public List<Produit> getProduitByKeyword(String keyword) {
         List<Produit> listeProduits = new ArrayList<Produit>();

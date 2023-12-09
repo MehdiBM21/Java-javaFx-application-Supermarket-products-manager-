@@ -135,6 +135,9 @@
 #home:pressed {
     -fx-background-color: #192A56; /* Adjust as needed */
 }
+#in{
+    -fx-background-color: #2c4987;
+}
 
 /* #users */
 #users {
@@ -163,7 +166,7 @@
 
 /* Au clic de la souris pour #logout */
 #logout:pressed {
-    -fx-background-color: #192A56; /* Adjust as needed */
+    -fx-background-color: #940606; /* Adjust as needed */
 }
 
 #categoriesContainer{

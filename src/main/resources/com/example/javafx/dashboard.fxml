@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="background" prefHeight="597.0" prefWidth="831.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafx.DashboardController">
+<AnchorPane fx:id="background" prefHeight="600.0" prefWidth="830.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafx.DashboardController">
    <children>
-      <AnchorPane fx:id="sidebar" prefHeight="597.0" prefWidth="42.0">
+      <AnchorPane fx:id="sidebar" prefHeight="600.0" prefWidth="54.0">
          <children>
             <ImageView fitHeight="44.0" fitWidth="50.0" layoutX="5.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -21,7 +21,7 @@
             </ImageView>
             <VBox fx:id="sidebarContainer" layoutX="1.0" layoutY="234.0" prefHeight="158.0" prefWidth="41.0">
                <children>
-                  <Button fx:id="home" alignment="CENTER" mnemonicParsing="false">
+                  <Button fx:id="in" alignment="CENTER" mnemonicParsing="false">
                      <graphic>
                         <ImageView fitHeight="34.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -58,7 +58,7 @@
                   </Label>
                </children>
             </VBox>
-            <VBox fx:id="sidebarContainer1" layoutX="3.0" layoutY="543.0" prefHeight="54.0" prefWidth="51.0">
+            <VBox fx:id="sidebarContainer1" layoutX="3.0" layoutY="543.0" prefHeight="55.0" prefWidth="51.0">
                <children>
                   <Button fx:id="logout" alignment="CENTER" mnemonicParsing="false">
                      <graphic>

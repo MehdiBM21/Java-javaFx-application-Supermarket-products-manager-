@@ -162,6 +162,7 @@
 /* #logout */
 #logout {
     -fx-background-color: #111B4E;
+    -fx-background-radius: 15;
 }
 
 /* Au clic de la souris pour #logout */

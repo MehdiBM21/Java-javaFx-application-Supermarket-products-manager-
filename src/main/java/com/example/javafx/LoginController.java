@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -63,7 +65,6 @@ public class LoginController implements Initializable {
             scene = new Scene(root);
 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setX(200);
 
 
             scene.setFill(Color.TRANSPARENT);
@@ -71,6 +72,10 @@ public class LoginController implements Initializable {
 
             stage.setScene(scene);
             stage.show();
+            Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+            stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+            stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
+
         }
     public void close(ActionEvent event){
         Alert alert=new Alert(Alert.AlertType.CONFIRMATION);

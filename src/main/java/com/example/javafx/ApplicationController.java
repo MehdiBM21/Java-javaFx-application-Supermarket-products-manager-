@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.Parent;
@@ -18,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -205,6 +207,10 @@ public class ApplicationController implements Initializable{
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
         stage.show();
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
+
     }
     public void addProduct(){
         addProduct_pane.toFront();

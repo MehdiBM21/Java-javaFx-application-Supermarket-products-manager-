@@ -342,34 +342,34 @@
                         <Font name="Arial" size="40.0" />
                      </font>
                   </Label>
-                  <VBox layoutX="327.0" layoutY="116.0" prefHeight="349.0" prefWidth="293.0" style="-fx-spacing: 5;">
+                  <VBox layoutX="327.0" layoutY="116.0" prefHeight="373.0" prefWidth="293.0" style="-fx-spacing: 10;">
                      <children>
                         <JFXTextField fx:id="designation_field" cache="true" focusColor="WHITE" labelFloat="true" prefHeight="46.0" prefWidth="282.0" promptText="Designation" unFocusColor="BLACK">
                            <font>
                               <Font name="Calibri" size="16.0" />
                            </font>
                         </JFXTextField>
-                        <Label fx:id="designation_rule" prefHeight="17.0" prefWidth="295.0" text="label" textFill="RED" />
+                        <Label fx:id="designation_rule" prefHeight="17.0" prefWidth="295.0" textFill="RED" />
                         <JFXTextField fx:id="quantite_field" cache="true" focusColor="WHITE" labelFloat="true" prefHeight="46.0" prefWidth="282.0" promptText="Quantité" styleClass="text-field" unFocusColor="WHITE">
                            <font>
                               <Font name="Calibri" size="16.0" />
                            </font>
                         </JFXTextField>
-                        <Label fx:id="quantite_rule" layoutX="10.0" layoutY="80.0" prefHeight="17.0" prefWidth="295.0" text="Label" textFill="RED" />
+                        <Label fx:id="quantite_rule" layoutX="10.0" layoutY="80.0" prefHeight="17.0" prefWidth="295.0" textFill="RED" />
                         <JFXTextField fx:id="prix_field" cache="true" focusColor="WHITE" labelFloat="true" prefHeight="46.0" prefWidth="282.0" promptText="Prix" styleClass="text-field" unFocusColor="WHITE">
                            <font>
                               <Font name="Calibri" size="16.0" />
                            </font>
                         </JFXTextField>
-                        <Label fx:id="prix_rule" layoutX="10.0" layoutY="342.0" prefHeight="17.0" prefWidth="295.0" text="Label" textFill="RED" />
+                        <Label fx:id="prix_rule" layoutX="10.0" layoutY="342.0" prefHeight="17.0" prefWidth="295.0" textFill="RED" />
                         <DatePicker fx:id="date_field" editable="false" prefHeight="36.0" prefWidth="293.0" promptText="date d'entree de stock" />
-                        <Label fx:id="date_rule" layoutX="10.0" layoutY="246.0" prefHeight="17.0" prefWidth="295.0" text="Label" textFill="RED" />
+                        <Label fx:id="date_rule" layoutX="10.0" layoutY="246.0" prefHeight="17.0" prefWidth="295.0" textFill="RED" />
                         <DatePicker fx:id="peremption_field" editable="false" prefHeight="36.0" prefWidth="293.0" promptText="date de peremption (si existe)" />
-                        <Label fx:id="peremption_rule" prefHeight="17.0" prefWidth="295.0" text="Label" textFill="RED" />
+                        <Label fx:id="peremption_rule" prefHeight="17.0" prefWidth="295.0" textFill="RED" />
                      </children>
                   </VBox>
-                  <JFXButton fx:id="valider_btn" layoutX="355.0" layoutY="483.0" onAction="#ValiderProduit" text="Valider" textFill="#d3d3d3" />
-                  <JFXButton fx:id="annulerProduit_btn" layoutX="532.0" layoutY="501.0" onAction="#cancelProduct" text="Annuler" textFill="#d3d3d3" />
+                  <JFXButton fx:id="valider_btn" layoutX="355.0" layoutY="497.0" onAction="#ValiderProduit" text="Valider" textFill="#d3d3d3" />
+                  <JFXButton fx:id="annulerProduit_btn" layoutX="532.0" layoutY="515.0" onAction="#cancelProduct" text="Annuler" textFill="#d3d3d3" />
                </children>
             </Pane>
          </children>

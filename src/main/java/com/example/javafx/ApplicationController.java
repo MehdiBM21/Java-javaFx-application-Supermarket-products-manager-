@@ -279,12 +279,13 @@ public class ApplicationController implements Initializable{
             date_rule.setText("Vous devez fournir la date d'entrée!");
             flag+=1;
         }
-        if(flag != 0) return true;
-        else return false;
+        if(flag != 0) return false;
+        else return true;
     }
 
     public void ValiderProduit() {
         if(rules()){
+            System.out.println("OUI");
             int categoryId = categorieNumber;
             String designation = designation_field.getText();
             int qte = Integer.parseInt(quantite_field.getText());

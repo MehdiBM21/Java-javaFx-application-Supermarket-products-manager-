@@ -16,10 +16,10 @@ public class CategorieDaoImpl extends AbstractDao implements ICategorieDao {
         String sql = "INSERT INTO category (nom) VALUES (?)";
         try {
             pst = connection.prepareStatement(sql);
-            pst.setString(1, obj.getCategoryName());
+            pst.setString(1, obj.getNom());
             int affectedRows = pst.executeUpdate();
             if (affectedRows > 0) {
-                System.out.println("Produit ajouté ");
+                System.out.println("Catégorie ajoutée");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -35,9 +35,9 @@ public class CategorieDaoImpl extends AbstractDao implements ICategorieDao {
             pst.setInt(1, id);
             int rowsDeleted = pst.executeUpdate();
             if (rowsDeleted > 0) {
-                System.out.println("Product deleted successfully!");
+                System.out.println("Category deleted successfully!");
             } else {
-                System.out.println("Product with ID " + id + " not found.");
+                System.out.println("Category with ID " + id + " not found.");
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -53,7 +53,7 @@ public class CategorieDaoImpl extends AbstractDao implements ICategorieDao {
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                return new Categorie(rs.getInt("id"), rs.getString("categoryName"));
+                return new Categorie(rs.getInt("id"), rs.getString("nom"));
             } else {
                 return null;
             }
@@ -70,10 +70,10 @@ public class CategorieDaoImpl extends AbstractDao implements ICategorieDao {
             while (rs.next()) {
                 listeCategories.add(new Categorie(
                         rs.getInt("id"),
-                        rs.getString("categoryName")));
+                        rs.getString("nom")));
             }
         } catch (SQLException e) {
-            System.err.println("Erreur lors de la récupération de tous les produits");
+            System.err.println("Erreur lors de la récupération de toutes les catégories");
             e.printStackTrace();
         }
         return listeCategories;

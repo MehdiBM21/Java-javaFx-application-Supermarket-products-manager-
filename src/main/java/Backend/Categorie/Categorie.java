@@ -5,14 +5,14 @@ import lombok.Data;
 @Data
 public class Categorie {
     private int id;
-    private String categoryName;
+    private String nom;
     // Remove the 'description' attribute
-    public Categorie(int id, String categoryName){
+    public Categorie(int id, String nom){
         this.id = id;
-        this.categoryName = categoryName;
+        this.nom = nom;
     }
-    public Categorie(String categoryName){
-        this.categoryName = categoryName;
+    public Categorie(String nom){
+        this.nom = nom;
     }
     public Categorie(){
 

@@ -1,4 +1,4 @@
-package Produit;
+package Backend.Produit;
 
 import java.sql.*;
 import java.util.ArrayList;

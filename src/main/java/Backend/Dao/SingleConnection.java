@@ -1,4 +1,4 @@
-package Produit;
+package Backend.Dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

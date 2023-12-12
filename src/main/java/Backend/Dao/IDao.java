@@ -1,4 +1,4 @@
-package Produit;
+package Backend.Dao;
 
 import java.util.List;
 

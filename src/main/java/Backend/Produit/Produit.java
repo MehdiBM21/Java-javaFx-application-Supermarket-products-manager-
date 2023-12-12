@@ -1,4 +1,4 @@
-package Produit;
+package Backend.Produit;
 
 import lombok.Data;
 

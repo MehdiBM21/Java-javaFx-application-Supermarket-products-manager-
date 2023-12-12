@@ -1,7 +1,7 @@
-package Produit;
+package Backend.Produit;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import Backend.Dao.AbstractDao;
+import Backend.Dao.IProduitDao;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class ProduitDaoImpl extends AbstractDao implements IProduitDao {
                 }
             }
 
-            System.out.println("Produit ajouté avec ID: " + obj.getId());
+            System.out.println("Backend.Produit ajouté avec ID: " + obj.getId());
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -104,15 +104,15 @@ public class ProduitDaoImpl extends AbstractDao implements IProduitDao {
         }
         return listeProduits;
     }
-    /*public ObservableList<Produit> getAll() {
-        ObservableList<Produit> listeProduits = FXCollections.observableArrayList();
+    /*public ObservableList<Backend.Produit> getAll() {
+        ObservableList<Backend.Produit> listeProduits = FXCollections.observableArrayList();
         try (PreparedStatement pst = connection.prepareStatement("SELECT * FROM produit");
              ResultSet rs = pst.executeQuery()) {
             while (rs.next()) {
                 Date dateSql = rs.getDate("date");
                 Date peremptionSql = rs.getDate("peremption");
 
-                Produit produit = new Produit(
+                Backend.Produit produit = new Backend.Produit(
                         rs.getInt("id"),
                         rs.getInt("idCategorie"),
                         rs.getString("designation"),
@@ -157,11 +157,11 @@ public class ProduitDaoImpl extends AbstractDao implements IProduitDao {
         }
         return listeProduits;
     }
-    public List<Produit> getProduitByCategorie(int categorie){
+    public List<Produit> getProduitByCategorie(int idCategorie){
         List<Produit> listeProduits = new ArrayList<Produit>();
         String sql = "SELECT * FROM produit WHERE idCategorie=?";
         try (PreparedStatement pst = connection.prepareStatement(sql)) {
-            pst.setInt(1, categorie);
+            pst.setInt(1, idCategorie);
             try (ResultSet rs = pst.executeQuery()) {
                 while (rs.next()) {
                     Date dateSql = rs.getDate("date");

@@ -126,13 +126,13 @@
     /*-fx-alignment: center;*/
     -fx-spacing: 10;
 }
-/* #home */
-#home {
+/* #dashboard */
+#dashboard {
     -fx-background-color: #111B4E;
 }
 
-/* Au clic de la souris pour #home */
-#home:pressed {
+/* Au clic de la souris pour #dashboard */
+#dashboard:pressed {
     -fx-background-color: #192A56; /* Adjust as needed */
 }
 #in{

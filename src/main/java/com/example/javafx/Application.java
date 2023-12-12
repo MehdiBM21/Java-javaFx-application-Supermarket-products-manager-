@@ -1,6 +1,5 @@
 package com.example.javafx;
 
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class main extends Application {
+public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
         /*FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
@@ -18,7 +17,7 @@ public class main extends Application {
         stage.setScene(scene);
         stage.show();*/
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/example/javafx/dashboard.fxml"));//creating a root node that dictates how the other nodes will be arranged
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/javafx/users.fxml"));//creating a root node that dictates how the other nodes will be arranged
            // Parent root = FXMLLoader.load(getClass().getResource("/com/example/javafx/produits.fxml"));//creating a root node that dictates how the other nodes will be arranged
             Scene scene = new Scene(root);//adding the root to the Scene
             scene.getStylesheets().add(getClass().getResource("/com/example/javafx/style.css").toExternalForm());

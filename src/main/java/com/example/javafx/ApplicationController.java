@@ -285,7 +285,6 @@ public class ApplicationController implements Initializable{
 
     public void ValiderProduit() {
         if(rules()){
-            System.out.println("OUI");
             int categoryId = categorieNumber;
             String designation = designation_field.getText();
             int qte = Integer.parseInt(quantite_field.getText());

@@ -1,0 +1,56 @@
+.root{
+    -fx-background-color:#2F323B ;
+}
+#main_pan{
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+}
+
+.text-field{
+    -fx-text-fill: #fcfcfc;
+    -fx-prompt-text-fill: #C0C0C0;
+    -fx-padding: 0 0 0 10px;
+
+
+    -fx-background-radius:13px ;
+    -fx-background-color: #23262D;
+    -fx-font-size:16px;
+    -fx-font-family: Calibri;
+    -fx-font-weight: bold;
+
+}
+.text-field:focused{
+    -fx-padding: 7px 0 0 1px;
+    -fx-background-radius:13px 13px 0 0 ;
+
+
+}
+#loginButton{
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+    -fx-background-color: #E7842A;
+    -fx-font-size:21px;
+    -fx-font-family: Calibri;
+    -fx-font-weight: bolder;
+    -fx-border-width: 2px;
+    -fx-transition-duration:2s;
+
+}
+#loginButton:hover{
+    -fx-scale-x: 1.1;
+    -fx-scale-y:1.1;
+
+}
+#hbox{
+    -fx-background-color: #444444;
+    -fx-background-radius: 20px 20px 0 0;
+}
+#close_button{
+    -fx-background-color: transparent;
+    -fx-max-width: 33px;
+
+
+}
+#close_button:hover{
+    -fx-background-color: #f34986;
+}

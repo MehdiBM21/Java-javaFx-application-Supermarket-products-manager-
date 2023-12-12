@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="main_pan" prefHeight="645.0" prefWidth="1099.0" stylesheets="@admin.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafx.ApplicationController">
+   <children>
+      <AnchorPane fx:id="topBar" prefHeight="45.0" prefWidth="1101.0">
+         <children>
+            <HBox fx:id="hbox" alignment="CENTER_RIGHT" prefHeight="46.0" prefWidth="1109.0" spacing="998.0">
+               <children>
+                  <ImageView fitHeight="44.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icon.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="close_button" mnemonicParsing="false" onAction="#close">
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="CLOSE" size="21px" />
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="sideBar" layoutY="46.0" prefHeight="606.0" prefWidth="214.0">
+         <children>
+            <VBox fx:id="sideBar_vbox" alignment="CENTER" prefHeight="518.0" prefWidth="214.0" spacing="13.0">
+               <children>
+                  <JFXButton fx:id="home" alignment="TOP_LEFT" buttonType="RAISED" defaultButton="true" graphicTextGap="17.0" onAction="#switchTo" prefHeight="50.0" prefWidth="191.0" ripplerFill="WHITE" style="-fx-background-radius: 16px;" text="Dashboard" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="HOME" size="25px">
+                           <font>
+                              <Font name="System Italic" size="41.0" />
+                           </font>
+                        </FontAwesomeIcon>
+                     </graphic>
+                     <font>
+                        <Font name="Calibri" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets left="14.0" top="10.0" />
+                     </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton alignment="TOP_LEFT" graphicTextGap="17.0" prefHeight="50.0" prefWidth="191.0" text="Account" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets left="14.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="USER" size="25px">
+                           <font>
+                              <Font name="System Italic" size="41.0" />
+                           </font>
+                        </FontAwesomeIcon>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton fx:id="users" alignment="TOP_LEFT" graphicTextGap="17.0" onAction="#switchTo" prefHeight="50.0" prefWidth="191.0" text="Users" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets left="14.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="USERS" size="25px">
+                           <font>
+                              <Font name="System Italic" size="41.0" />
+                           </font>
+                        </FontAwesomeIcon>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton fx:id="sidebar_producs" alignment="TOP_LEFT" graphicTextGap="17.0" prefHeight="50.0" prefWidth="191.0" text="Products" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets left="14.0" top="10.0" />
+                     </padding>
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="SHOPPING_CART" size="25px">
+                           <font>
+                              <Font name="System Italic" size="41.0" />
+                           </font>
+                        </FontAwesomeIcon>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+               </children>
+            </VBox>
+            <JFXButton fx:id="signout_Btn" alignment="TOP_LEFT" graphicTextGap="17.0" layoutX="11.0" layoutY="541.0" onAction="#SignOut" prefHeight="50.0" prefWidth="191.0" text="Sign out" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIcon fill="WHITE" glyphName="SIGN_OUT" rotate="180.0" size="25px">
+                     <font>
+                        <Font name="System Italic" size="41.0" />
+                     </font>
+                  </FontAwesomeIcon>
+               </graphic>
+               <font>
+                  <Font name="Calibri" size="24.0" />
+               </font>
+               <padding>
+                  <Insets left="14.0" top="10.0" />
+               </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="content_pane" layoutX="214.0" layoutY="46.0" prefHeight="606.0" prefWidth="895.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <children>
+            <Pane fx:id="users_pane" prefHeight="606.0" prefWidth="895.0">
+               <children>
+                  <Label layoutX="51.0" layoutY="52.0" text="Utilisateurs:" textFill="#f20b0b">
+                     <font>
+                        <Font name="Arial Bold" size="41.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="usersTable" layoutX="81.0" layoutY="201.0" prefHeight="209.0" prefWidth="400.0">
+                     <columns>
+                        <TableColumn fx:id="idColumn" prefWidth="100.0" text="id" />
+                        <TableColumn fx:id="usernameColumn" prefWidth="100.0" text="Username" />
+                        <TableColumn fx:id="passwordColumn" prefWidth="100.0" text="Password" />
+                        <TableColumn fx:id="typeColumn" prefWidth="100.0" text="Type" />
+                     </columns>
+                  </TableView>
+               </children>
+            </Pane>
+            <Pane fx:id="products_pane" prefHeight="606.0" prefWidth="895.0">
+               <children>
+                  <TableView fx:id="ProduitsTable" layoutX="147.0" layoutY="191.0" prefHeight="200.0" prefWidth="602.0">
+                     <columns>
+                        <TableColumn fx:id="id" prefWidth="75.0" text="id" />
+                        <TableColumn fx:id="designation" prefWidth="75.0" text="designation" />
+                        <TableColumn fx:id="quantite" prefWidth="75.0" text="quantité" />
+                        <TableColumn fx:id="prix" prefWidth="75.0" text="prix" />
+                        <TableColumn fx:id="date" prefWidth="150.0" text="date" />
+                        <TableColumn fx:id="dateDePeremption" prefWidth="150.0" text="date de peremption" />
+                     </columns>
+                  </TableView>
+                  <Label fx:id="categorieLabel" layoutX="36.0" layoutY="78.0" text="Catégorie: " textFill="#cd2e2e">
+                     <font>
+                        <Font size="37.0" />
+                     </font>
+                  </Label>
+                  <JFXButton alignment="TOP_LEFT" buttonType="RAISED" defaultButton="true" graphicTextGap="17.0" layoutX="539.0" layoutY="132.0" prefHeight="50.0" prefWidth="150.0" ripplerFill="WHITE" style="-fx-background-radius: 16px;" text="REFRESH" textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="REFRESH" size="25px">
+                           <font>
+                              <Font name="System Italic" size="41.0" />
+                           </font>
+                        </FontAwesomeIcon>
+                     </graphic>
+                     <font>
+                        <Font name="Calibri" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets left="14.0" top="10.0" />
+                     </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <FontAwesomeIcon fill="WHITE" glyphName="SEARCH" layoutX="311.0" layoutY="165.0" size="25px">
+                     <font>
+                        <Font name="System Italic" size="41.0" />
+                     </font>
+                  </FontAwesomeIcon>
+                  <JFXButton alignment="TOP_LEFT" buttonType="RAISED" defaultButton="true" graphicTextGap="17.0" layoutX="147.0" layoutY="133.0" onAction="#addProduct" prefHeight="50.0" prefWidth="108.0" ripplerFill="WHITE" style="-fx-background-radius: 16px;" text="ADD " textFill="WHITE">
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="PLUS" size="25px">
+                           <font>
+                              <Font name="System Italic" size="41.0" />
+                           </font>
+                        </FontAwesomeIcon>
+                     </graphic>
+                     <font>
+                        <Font name="Calibri" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets left="14.0" top="10.0" />
+                     </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+               </children>
+            </Pane>
+            <Pane fx:id="dashboard_pane" prefHeight="606.0" prefWidth="895.0">
+               <children>
+                  <Label layoutX="27.0" layoutY="217.0" prefHeight="43.0" prefWidth="177.0" text="Catégories:" textFill="#757575">
+                     <font>
+                        <Font name="Arial" size="29.0" />
+                     </font>
+                  </Label>
+                  <HBox fx:id="categoriesContainer" layoutX="77.0" layoutY="284.0" prefHeight="127.0" prefWidth="742.0">
+                     <children>
+                        <Button fx:id="categorie1" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="5.0" mnemonicParsing="false" onAction="#showProductsByCategorie" opacity="0.91" prefHeight="127.0" prefWidth="177.0" style="-fx-padding: 0 0 0 10;" text="Produits électroniques" wrapText="true">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="52.0" fitWidth="60.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@computer.png" />
+                                 </image>
+                                 <effect>
+                                    <Blend />
+                                 </effect>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="categorie3" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="5.0" mnemonicParsing="false" opacity="0.91" prefHeight="127.0" prefWidth="177.0" style="-fx-padding: 0 0 0 10;" text="Produits surgelés" wrapText="true">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="64.0" fitWidth="69.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@cold.png" />
+                                 </image>
+                                 <effect>
+                                    <Blend />
+                                 </effect>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="categorie4" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="5.0" mnemonicParsing="false" opacity="0.91" prefHeight="127.0" prefWidth="177.0" style="-fx-padding: 0 0 0 10;" text="Produits de ménage" wrapText="true">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="57.0" fitWidth="63.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@menage.png" />
+                                 </image>
+                                 <effect>
+                                    <Blend />
+                                 </effect>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="categorie2" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="5.0" mnemonicParsing="false" opacity="0.91" prefHeight="127.0" prefWidth="177.0" style="-fx-padding: 0 0 0 10;" text="Aliments Frais" wrapText="true">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="64.0" fitWidth="69.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@legumes.png" />
+                                 </image>
+                                 <effect>
+                                    <Blend />
+                                 </effect>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="categoriesContainer" layoutX="77.0" layoutY="428.0" prefHeight="127.0" prefWidth="742.0">
+                     <children>
+                        <Button fx:id="categorie5" alignment="BASELINE_LEFT" contentDisplay="RIGHT" graphicTextGap="31.0" mnemonicParsing="false" opacity="0.91" prefHeight="127.0" prefWidth="177.0" style="-fx-padding: 0 0 0 10;" text="Vêtements" wrapText="true">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="57.0" fitWidth="63.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@clothes.png" />
+                                 </image>
+                                 <effect>
+                                    <Blend />
+                                 </effect>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="plus" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" opacity="0.91" prefHeight="127.0" prefWidth="177.0" wrapText="true">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="57.0" fitWidth="63.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@plus.png" />
+                                 </image>
+                                 <effect>
+                                    <Blend />
+                                 </effect>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+            <Pane fx:id="addProduct_pane" prefHeight="606.0" prefWidth="895.0">
+               <children>
+                  <Label layoutX="316.0" layoutY="42.0" text="Ajouter un produit" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="40.0" />
+                     </font>
+                  </Label>
+                  <VBox layoutX="327.0" layoutY="116.0" prefHeight="349.0" prefWidth="293.0" style="-fx-spacing: 5;">
+                     <children>
+                        <JFXTextField fx:id="designation_field" cache="true" focusColor="WHITE" labelFloat="true" prefHeight="46.0" prefWidth="282.0" promptText="Designation" unFocusColor="BLACK">
+                           <font>
+                              <Font name="Calibri" size="16.0" />
+                           </font>
+                        </JFXTextField>
+                        <Label fx:id="designation_rule" prefHeight="17.0" prefWidth="295.0" text="label" textFill="RED" />
+                        <JFXTextField fx:id="quantite_field" cache="true" focusColor="WHITE" labelFloat="true" prefHeight="46.0" prefWidth="282.0" promptText="Quantité" styleClass="text-field" unFocusColor="WHITE">
+                           <font>
+                              <Font name="Calibri" size="16.0" />
+                           </font>
+                        </JFXTextField>
+                        <Label fx:id="quantite_rule" layoutX="10.0" layoutY="80.0" prefHeight="17.0" prefWidth="295.0" text="Label" textFill="RED" />
+                        <JFXTextField fx:id="prix_field" cache="true" focusColor="WHITE" labelFloat="true" prefHeight="46.0" prefWidth="282.0" promptText="Prix" styleClass="text-field" unFocusColor="WHITE">
+                           <font>
+                              <Font name="Calibri" size="16.0" />
+                           </font>
+                        </JFXTextField>
+                        <Label fx:id="prix_rule" layoutX="10.0" layoutY="342.0" prefHeight="17.0" prefWidth="295.0" text="Label" textFill="RED" />
+                        <DatePicker fx:id="date_field" editable="false" prefHeight="36.0" prefWidth="293.0" promptText="date d'entree de stock" />
+                        <Label fx:id="date_rule" layoutX="10.0" layoutY="246.0" prefHeight="17.0" prefWidth="295.0" text="Label" textFill="RED" />
+                        <DatePicker fx:id="peremption_field" editable="false" prefHeight="36.0" prefWidth="293.0" promptText="date de peremption (si existe)" />
+                        <Label fx:id="peremption_rule" prefHeight="17.0" prefWidth="295.0" text="Label" textFill="RED" />
+                     </children>
+                  </VBox>
+                  <JFXButton fx:id="valider_btn" layoutX="355.0" layoutY="483.0" onAction="#ValiderProduit" text="Valider" textFill="#d3d3d3" />
+                  <JFXButton fx:id="annulerProduit_btn" layoutX="532.0" layoutY="501.0" onAction="#cancelProduct" text="Annuler" textFill="#d3d3d3" />
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

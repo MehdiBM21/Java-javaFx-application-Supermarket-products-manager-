@@ -131,32 +131,6 @@ public class ProduitDaoImpl extends AbstractDao implements IProduitDao {
     }
 */
     @Override
-    public List<Produit> getProduitByKeyword(String keyword) {
-        List<Produit> listeProduits = new ArrayList<Produit>();
-        String sql = "SELECT * FROM produit WHERE designation LIKE ?";
-        try (PreparedStatement pst = connection.prepareStatement(sql)) {
-            pst.setString(1, "%" + keyword + "%");
-            try (ResultSet rs = pst.executeQuery()) {
-                while (rs.next()) {
-                    Date dateSql = rs.getDate("date");
-                    Date peremptionSql = rs.getDate("peremption");
-
-                    listeProduits.add(new Produit(
-                            rs.getInt("id"),
-                            rs.getInt("idCategorie"),
-                            rs.getString("designation"),
-                            rs.getInt("qte"),
-                            rs.getDouble("prix"),
-                            dateSql != null ? dateSql.toLocalDate() : null,
-                            peremptionSql != null ? peremptionSql.toLocalDate() : null));
-                }
-            }
-        } catch (SQLException e) {
-            System.err.println("Erreur lors de la récupération des produits par mot-clé");
-            e.printStackTrace();
-        }
-        return listeProduits;
-    }
     public List<Produit> getProduitByCategorie(int idCategorie){
         List<Produit> listeProduits = new ArrayList<Produit>();
         String sql = "SELECT * FROM produit WHERE idCategorie=?";
@@ -183,4 +157,66 @@ public class ProduitDaoImpl extends AbstractDao implements IProduitDao {
         }
         return listeProduits;
     }
+    @Override
+    public List<Produit> getProduitByKeyword(String designation, int idCategorie){
+        if (designation.isEmpty()) return getProduitByCategorie(idCategorie);
+        List<Produit> listeProduits = new ArrayList<Produit>();
+        String sql = "SELECT * FROM produit WHERE idCategorie=? and designation LIKE ?";
+        try (PreparedStatement pst = connection.prepareStatement(sql)) {
+            pst.setInt(1, idCategorie);
+            pst.setString(2, '%'+designation+'%');
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    Date dateSql = rs.getDate("date");
+                    Date peremptionSql = rs.getDate("peremption");
+
+                    listeProduits.add(new Produit(
+                            rs.getInt("id"),
+                            rs.getInt("idCategorie"),
+                            rs.getString("designation"),
+                            rs.getInt("quantite"),
+                            rs.getDouble("prix"),
+                            dateSql != null ? dateSql.toLocalDate() : null,
+                            peremptionSql != null ? peremptionSql.toLocalDate() : null));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la récupération des produits par mot-clé");
+            e.printStackTrace();
+        }
+        return listeProduits;
+    }
+    @Override
+    public void update(Produit obj) {
+        PreparedStatement pst = null;
+        String sql = "UPDATE produit SET designation=?, quantite=?, prix=?, date=?, peremption=? WHERE id=?";
+        try {
+            pst = connection.prepareStatement(sql);
+            //pst.setInt(1, obj.getIdCategorie());
+            pst.setString(1, obj.getDesignation());
+            pst.setInt(2, obj.getQte());
+            pst.setDouble(3, obj.getPrix());
+            pst.setDate(4, Date.valueOf(obj.getDate()));
+            pst.setDate(5, Date.valueOf(obj.getPeremption()));
+            pst.setInt(6, obj.getId());
+            int rowsUpdated = pst.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Product updated successfully!");
+            } else {
+                System.out.println("Product with ID " + obj.getId() + " not found.");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+
 }

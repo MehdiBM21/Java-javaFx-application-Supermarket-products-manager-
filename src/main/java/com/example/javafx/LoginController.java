@@ -1,5 +1,7 @@
 package com.example.javafx;
 
+import Backend.User.User;
+import Backend.User.UserDaoImpl;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -22,6 +24,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -45,6 +48,8 @@ public class LoginController implements Initializable {
     @FXML
     private JFXPasswordField passwordField;
 
+    private UserDaoImpl userDao = new UserDaoImpl();
+
 
         // ... (other declarations)
 
@@ -52,10 +57,13 @@ public class LoginController implements Initializable {
             String username = usernameField.getText();
             String password = passwordField.getText();
 
+            List<User> userList = userDao.getUsersByInfo(username, password);
 
-            if (username.equals("admin") && password.equals("admin")) {
+            if (!userList.isEmpty()) {
+                // Successful login
                 changeScene(event, "/com/example/javafx/admin.fxml");
             } else {
+                // Incorrect username or password
                 label.setText("Username or password incorrect");
             }
         }

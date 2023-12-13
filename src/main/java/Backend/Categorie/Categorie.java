@@ -14,7 +14,5 @@ public class Categorie {
     public Categorie(String nom){
         this.nom = nom;
     }
-    public Categorie(){
 
-    }
 }

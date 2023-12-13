@@ -13,23 +13,47 @@ public class CategorieDaoImpl extends AbstractDao implements ICategorieDao {
     public void add(Categorie obj) {
         PreparedStatement pst = null;
         ResultSet generatedKeys = null;
-        String sql = "INSERT INTO category (nom) VALUES (?)";
+        String sql = "INSERT INTO categorie (nom) VALUES (?)";
         try {
-            pst = connection.prepareStatement(sql);
+            pst = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             pst.setString(1, obj.getNom());
             int affectedRows = pst.executeUpdate();
+
             if (affectedRows > 0) {
-                System.out.println("Catégorie ajoutée");
+                // Récupérer les clés générées
+                generatedKeys = pst.getGeneratedKeys();
+
+                if (generatedKeys.next()) {
+                    // Définir l'ID généré sur votre objet Categorie
+                    obj.setId(generatedKeys.getInt(1));
+                } else {
+                    System.out.println("Impossible de récupérer l'ID généré.");
+                }
+
+                System.out.println("Catégorie ajoutée avec ID: " + obj.getId());
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            // Fermer le ResultSet et le PreparedStatement dans le bloc finally
+            try {
+                if (generatedKeys != null) {
+                    generatedKeys.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
+
 
     @Override
     public void delete(int id) {
         PreparedStatement pst = null;
-        String sql = "DELETE FROM category WHERE id = ?";
+        String sql = "DELETE FROM categorie WHERE id = ?";
         try {
             pst = connection.prepareStatement(sql);
             pst.setInt(1, id);

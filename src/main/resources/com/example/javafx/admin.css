@@ -25,7 +25,9 @@
     -fx-background-color:#2F323B ;
 }
 
-#content_pane, #products_pane, #users_pane, #dashboard_pane, #addProduct_pane{
+#content_pane, #products_pane, #users_pane, #dashboard_pane, #addProduct_pane, #modifierProduct_pane,
+#addUser_pane, #modifierUser_pane,
+#addCategory_pane{
     -fx-background-radius: 0 0 20px 0;
     -fx-background-color: -fx-mainColor;
 }
@@ -46,17 +48,14 @@
 /*-------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------
  */
-/*#categorie{
-    -fx-background-color:linear-gradient(to bottom right, #067BC2, #84BCDA);
-    -fx-background-radius: 20;
-}*/
+
 /* Categorie 1 */
 /*#background{
     -fx-background-color: #E8E8E8;
 }*/
 
 /* Categorie 1 */
-#categorie1 {
+#categorie1 .button{
     -fx-background-color: linear-gradient(to bottom right, #FF5733, #FFC300);
     -fx-background-radius: 20;
 }
@@ -222,7 +221,10 @@
     -fx-spacing: 10;
 }
 /*add products CSS*/
-#addProduct_pane .text-field, #date_field, #peremption_field{
+#addProduct_pane .text-field,#produitSearch_field, #date_field, #peremption_field,
+#modifierProduct_pane .text-field, #modifierDate_field, #modifierPeremption_field,
+#addUser_pane .text-field, #modifierUser_pane .text-field,
+#addCategory_pane .text-field{
     -fx-text-fill: #fcfcfc;
     -fx-prompt-text-fill: #C0C0C0;
     -fx-padding: 0 0 0 10px;
@@ -233,14 +235,15 @@
     -fx-font-weight: bold;
 
 }
-#addProduct_pane .text-field:focused{
+#addProduct_pane .text-field:focused, #produitSearch_field, #modifierProduct_pane .text-field:focused,
+#addCategory_pane .text-field:focused,#addUser_pane .text-field:focused, #modifierUser_pane .text-field:focused{
     -fx-padding: 7px 0 0 1px;
     -fx-background-radius:13px 13px 0 0 ;
 
 
 }
 
-#valider_btn{
+#valider_btn, #modifierValider_btn{
     -fx-border-radius: 30px;
     -fx-background-radius: 30px;
     -fx-padding: 15px;
@@ -252,8 +255,25 @@
     -fx-transition-duration:2s;
 
 }
-#valider_btn:hover{
+#valider_btn:hover, #modifierValider_btn:hover{
     -fx-scale-x: 1.1;
     -fx-scale-y:1.1;
 
+}
+
+#dashboard_pane .button {
+    -fx-background-color: linear-gradient(to bottom right, #D4AF37, #FFD700);
+    -fx-background-radius: 20;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 14px;
+}
+
+/* Au survol de la souris pour #dashboard_pane .button */
+#dashboard_pane .button:hover {
+    -fx-background-color: linear-gradient(to bottom right, #A08E2D, #CCB745); /* Dark yellow gradient on click *//* Yellow gradient on hover */
+}
+
+/* Au clic de la souris pour #dashboard_pane .button */
+#dashboard_pane .button:pressed {
+    -fx-background-color: linear-gradient(to bottom right, #343434, #565656); /* Restore original colors on click */
 }

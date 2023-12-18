@@ -1,34 +1,51 @@
 .root{
-    -fx-background-color:#2F323B ;
+    -fx-background-color:#212141 ;
+}
+.top-bar {
+    -fx-background-color: transparent;
+    -fx-background-radius: 20px 20px 0 0;
+}
+.top-bar .top-bar-buttons{
+    -fx-background-color: transparent;
+    -fx-max-width: 33px;
+
+
+}
+.top-bar .top-bar-buttons:hover{
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
 }
 #main_pan{
     -fx-border-radius: 20px;
     -fx-background-radius: 20px;
 }
 
-.text-field{
-    -fx-text-fill: #fcfcfc;
-    -fx-prompt-text-fill: #C0C0C0;
-    -fx-padding: 0 0 0 10px;
 
 
-    -fx-background-radius:13px ;
-    -fx-background-color: #23262D;
-    -fx-font-size:16px;
-    -fx-font-family: Calibri;
+.mfx-text-field {
+    -fx-font-size:16px ;
     -fx-font-weight: bold;
+    -fx-font-family:"Roboto";
+    -fx-border-width: 0 0 3px 0;
+    -fx-border-radius: 0;
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+    -fx-border-color: white;
 
 }
-.text-field:focused{
-    -fx-padding: 7px 0 0 1px;
-    -fx-background-radius:13px 13px 0 0 ;
-
-
+#passwordField  .mfx-font-icon {
+    -mfx-color: white;
 }
+.mfx-text-field .floating-text {
+    -fx-background-color: transparent;
+    -fx-text-fill: #c0c0c0;
+}
+
+
 #loginButton{
-    -fx-border-radius: 30px;
-    -fx-background-radius: 30px;
-    -fx-background-color: #E7842A;
+
+    -fx-background-radius: 7px;
+    -fx-background-color: #5C59FD;
     -fx-font-size:21px;
     -fx-font-family: Calibri;
     -fx-font-weight: bolder;
@@ -36,21 +53,4 @@
     -fx-transition-duration:2s;
 
 }
-#loginButton:hover{
-    -fx-scale-x: 1.1;
-    -fx-scale-y:1.1;
 
-}
-#hbox{
-    -fx-background-color: #444444;
-    -fx-background-radius: 20px 20px 0 0;
-}
-#close_button{
-    -fx-background-color: transparent;
-    -fx-max-width: 33px;
-
-
-}
-#close_button:hover{
-    -fx-background-color: #f34986;
-}

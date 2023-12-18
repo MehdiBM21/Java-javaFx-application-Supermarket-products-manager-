@@ -4,11 +4,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<?import io.github.palexdev.materialfx.controls.MFXTableView?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="339.0" prefWidth="364.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tmp.HelloController">
    <children>
-      <Button layoutX="-6.0" layoutY="81.0" mnemonicParsing="false" onAction="#switchToScene2" prefHeight="25.0" prefWidth="372.0" text="Button 1" />
-      <Button layoutY="182.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="364.0" text="Button 2" />
-      <Label fx:id="id1" layoutY="115.0" prefHeight="17.0" prefWidth="364.0" text="text 1" />
-      <Label fx:id="id2" layoutY="221.0" prefHeight="17.0" prefWidth="364.0" text="text 2" />
+      <MFXTableView fx:id="table" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0"
+                    prefWidth="800.0" />
    </children>
 </AnchorPane>

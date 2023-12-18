@@ -1,0 +1,30 @@
+#type_field .caret .mfx-font-icon {
+    -mfx-color: white;
+
+}
+
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  ajouter categorie    ///////////////////////////////////*/
+#color_picker{
+    -fx-background-color:transparent;
+    -fx-border-width:0 0 3px 0;
+    -fx-border-color:white;
+    /*-fx-prompt-text-fill:white ;*/
+}
+#color_picker .mfx-font-icon{
+    -fx-color:white;
+    /*-fx-prompt-text-fill:white ;*/
+}
+
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\    refresh button ////////////////////////////////////*/
+.refresh_button{
+    -fx-padding: 10px 13px 10px 13px;
+    -fx-background-color: #EE5C55;
+    -fx-font-size: 17px;
+    -fx-cursor: hand;
+    -fx-background-radius: 10px;
+}
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\   delete and edit icons  ////////////////////////////////*/
+#edit_iconUser,#delete_iconUser{
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}

@@ -1,20 +1,30 @@
 package com.example.javafx;
+
 import Backend.Categorie.Categorie;
 import Backend.Categorie.CategorieDaoImpl;
 import Backend.Produit.Produit;
 import Backend.Produit.ProduitDaoImpl;
 import Backend.User.User;
 import Backend.User.UserDaoImpl;
+import animatefx.animation.RotateIn;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+
+import io.github.palexdev.materialfx.controls.*;
+import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
+import io.github.palexdev.materialfx.filter.DoubleFilter;
+import io.github.palexdev.materialfx.filter.IntegerFilter;
+import io.github.palexdev.materialfx.filter.StringFilter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -22,6 +32,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -29,7 +40,7 @@ import javafx.util.Callback;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -38,7 +49,10 @@ public class ApplicationController implements Initializable{
     @FXML
     private Stage stage;
     @FXML
-    private Button users, home;
+    private Button users, home ,refreshproduits_btn,refreshUsers_btn,refreshCategories_btn ;
+    @FXML
+    private Text refresh_icon,refresh_icon2,refresh_icon3;
+
     @FXML
     private HBox DBCategories_container;
 
@@ -54,21 +68,10 @@ public class ApplicationController implements Initializable{
     private AnchorPane content_pane;
     //produits pane variables
     @FXML
-    TableView<Produit> ProduitsTable;
+    MFXTableView<Produit> ProduitsTable;
     @FXML
-    TableColumn<Produit, Integer> id;
-    @FXML
-    TableColumn<Produit, String> designation;
-    @FXML
-    TableColumn<Produit, Integer> quantite;
-    @FXML
-    TableColumn<Produit, Double> prix;
-    @FXML
-    TableColumn<Produit, Date> date;
-    @FXML
-    TableColumn<Produit, Date> dateDePeremption;
-    @FXML
-    TableColumn<Produit, Void> actions;
+    MFXTableView<User> usersTable;
+
     @FXML
     Label categorieLabel, modifier_label, modifierUser_label;
     @FXML
@@ -78,18 +81,17 @@ public class ApplicationController implements Initializable{
             modifierUsername_rule, modifierPassword_rule, modifierType_rule,
             categoryName_rule;
     //USERS PANE VARIABLES
-    @FXML
-    TableView<User> usersTable;
-    @FXML
-    TableColumn<User, Integer> idColumn;
-    @FXML
-    TableColumn<User, String> usernameColumn;
-    @FXML
-    TableColumn<User, String> passwordColumn;
-    @FXML
-    TableColumn<User, String> typeColumn;
-    @FXML
-    TableColumn<User, Void> actionsColumn;
+
+//    @FXML
+//    TableColumn<User, Integer> idColumn;
+//    @FXML
+//    TableColumn<User, String> usernameColumn;
+//    @FXML
+//    TableColumn<User, String> passwordColumn;
+//    @FXML
+//    TableColumn<User, String> typeColumn;
+//    @FXML
+//    TableColumn<User, Void> actionsColumn;
     //DAO
     private UserDaoImpl userDao = new UserDaoImpl();
     private ProduitDaoImpl produitsDao = new ProduitDaoImpl();
@@ -103,14 +105,16 @@ public class ApplicationController implements Initializable{
             addUser_pane, modifierUser_pane,
             addCategory_pane;
     @FXML
-    TextField designation_field, quantite_field, prix_field, produitSearch_field,
+    TextField designation_field, prix_field, produitSearch_field,
               modifierDesignation_field, modifierQuantite_field, modifierPrix_field,
-                username_field, password_field, type_field,
+                username_field, password_field,
                 modifierUsername_field, modifierPassword_field, modifierType_field,
-                categoryName_field;
+                categoryName_field,quantite_field ;
     @FXML
-    DatePicker date_field, peremption_field,
-               modifierDate_field, modifierPeremption_field;
+    MFXDatePicker peremption_field,date_field, modifierDate_field, modifierPeremption_field;
+    @FXML
+    private MFXComboBox<String> type_field;
+
 
     public void close(ActionEvent event) {
 
@@ -123,6 +127,9 @@ public class ApplicationController implements Initializable{
             dashboard_pane.toFront();
             stage.close();
         }
+    }
+    public void minimize_window(ActionEvent event){
+        ((Stage)((Button)event.getSource()).getScene().getWindow()).setIconified(true);
     }
 
     public void switchTo(ActionEvent event) throws IOException {
@@ -147,7 +154,8 @@ public class ApplicationController implements Initializable{
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/javafx/produits.fxml"));
         //root = loader.load();
         //ProduitsController produitsController = loader.getController();
-        initializeProduits();
+       initializeProduits();
+
         displayCategorie(buttonText);
         products_pane.toFront();
         //stage = (Stage)((Node)e.getSource()).getScene().getWindow();
@@ -187,103 +195,245 @@ public class ApplicationController implements Initializable{
             main.primaryStage.setY(event.getScreenY() - y);
 
         });
+        refreshproduits_btn.setOnMousePressed(event ->{
+            RotateIn rotateIn=new RotateIn(refresh_icon);
+            rotateIn.setSpeed(0.7);
+            rotateIn.play();
+        });
+        refreshUsers_btn.setOnMousePressed(event ->{
+            RotateIn rotateIn=new RotateIn(refresh_icon2);
+            rotateIn.setSpeed(0.7);
+            rotateIn.play();
+        });
+        refreshCategories_btn.setOnMousePressed(event ->{
+            RotateIn rotateIn=new RotateIn(refresh_icon3);
+            rotateIn.setSpeed(0.7);
+            rotateIn.play();
+        });
+     setup_table_produit();
+     setup_table_users();
+    ObservableList<String> type_comboBox=FXCollections.observableArrayList("admin","caissier");
+    type_field.setItems(type_comboBox);
+
     }
     //PRODUIT METHODS
-    @FXML
-    public void initializeProduits() {
-        // Set up cell value factories for each column
-        id.setCellValueFactory(new PropertyValueFactory<Produit,Integer>("id"));
-        designation.setCellValueFactory(new PropertyValueFactory<Produit, String>("designation"));
-        quantite.setCellValueFactory(new PropertyValueFactory<Produit, Integer>("qte"));
-        prix.setCellValueFactory(new PropertyValueFactory<Produit, Double>("prix"));
-        date.setCellValueFactory(new PropertyValueFactory<Produit, Date>("date"));
-        dateDePeremption.setCellValueFactory(new PropertyValueFactory<Produit, Date>("peremption"));
-        actions.setCellFactory(createButtonCellFactory());
+    public void setup_table_produit(){
+        MFXTableColumn<Produit> idColumnProduit = new MFXTableColumn<>("Id", true, Comparator.comparing(Produit::getId));
+        MFXTableColumn<Produit> designationColumn = new MFXTableColumn<>("Designation", true, Comparator.comparing(Produit::getDesignation));
+        MFXTableColumn<Produit> quantiteColumn = new MFXTableColumn<>("Quantite", true, Comparator.comparing(Produit::getQte));
+        MFXTableColumn<Produit> prixColumn = new MFXTableColumn<>("Prix", true, Comparator.comparing(Produit::getPrix));
+        MFXTableColumn<Produit> dateColumn = new MFXTableColumn<>("Date", true, Comparator.comparing(Produit::getDate));
+        MFXTableColumn<Produit> peremptionColumn = new MFXTableColumn<>("Peremption", true, Comparator.comparing(Produit::getPeremption));
+        MFXTableColumn<Produit> supprimerColumn = new MFXTableColumn<>("Supprimer", true);
+        MFXTableColumn<Produit> modifierColumn = new MFXTableColumn<>("Modifier", true);
+        idColumnProduit.setRowCellFactory(Produit -> new MFXTableRowCell<>(Backend.Produit.Produit::getId));
+        designationColumn.setRowCellFactory(Produit -> new MFXTableRowCell<>(Backend.Produit.Produit::getDesignation));
+        quantiteColumn.setRowCellFactory(Produit -> new MFXTableRowCell<>(Backend.Produit.Produit::getQte));
+        prixColumn.setRowCellFactory(Produit -> new MFXTableRowCell<>(Backend.Produit.Produit::getPrix));
+        dateColumn.setRowCellFactory(Produit -> new MFXTableRowCell<>(Backend.Produit.Produit::getDate));
+        peremptionColumn.setRowCellFactory(Produit -> new MFXTableRowCell<>(Backend.Produit.Produit::getPeremption));
+        supprimerColumn.setRowCellFactory(produit -> new MFXTableRowCell<>(data -> data.getId(), data -> {return null;}) {
+            {
+                setAlignment(Pos.CENTER);
+                setMinWidth(60);
 
-
-        // Fetch data from DAO
-        ObservableList<Produit> produitsList = FXCollections.observableList(produitsDao.getProduitByCategorie(categorieNumber));
-
-        // Populate the TableView with data
-        ProduitsTable.setItems(produitsList);
-    }
-    @FXML
-    public void initializeProduitsSearch() {
-        // Set up cell value factories for each column
-        id.setCellValueFactory(new PropertyValueFactory<Produit,Integer>("id"));
-        this.designation.setCellValueFactory(new PropertyValueFactory<Produit, String>("designation"));
-        quantite.setCellValueFactory(new PropertyValueFactory<Produit, Integer>("qte"));
-        prix.setCellValueFactory(new PropertyValueFactory<Produit, Double>("prix"));
-        date.setCellValueFactory(new PropertyValueFactory<Produit, Date>("date"));
-        dateDePeremption.setCellValueFactory(new PropertyValueFactory<Produit, Date>("peremption"));
-        actions.setCellFactory(createButtonCellFactory());
-
-        String designation = produitSearch_field.getText();
-        // Fetch data from DAO
-        ObservableList<Produit> produitsList = FXCollections.observableList(produitsDao.getProduitByKeyword(designation, categorieNumber));
-
-        // Populate the TableView with data
-        ProduitsTable.setItems(produitsList);
-    }
-
-    private Callback<TableColumn<Produit, Void>, TableCell<Produit, Void>> createButtonCellFactory() {
-        return new Callback<TableColumn<Produit, Void>, TableCell<Produit, Void>>() {
-            @Override
-            public TableCell<Produit, Void> call(final TableColumn<Produit, Void> param) {
-                return new TableCell<Produit, Void>() {
-                    private final Button modifierButton = new Button("Modifier");
-                    private final Button supprimerButton = new Button("Supprimer");
-
-                    {
-                        modifierButton.setOnAction(event -> {
-                            Produit produit = getTableView().getItems().get(getIndex());
-                            productId_modifier = produit.getId();
-                            System.out.println("ID produit " + produit.getId());
-                            modifier(produit);
-                            modifier_label.setText("Modifier le Produit "+produit.getId());
-                            // Logique pour la modification ici
-                            System.out.println("Modifier produit avec l'ID : " + produit.getId());
-                        });
-
-                        supprimerButton.setOnAction(event -> {
-                            Produit produit = getTableView().getItems().get(getIndex());
-                            supprimerProduit(produit);
-                            System.out.println("Supprimer produit avec l'ID : " + produit.getId());
-                        });
-                    }
-
-                    @Override
-                    protected void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(createButtonPane());
-                        }
-                    }
-
-                    private Pane createButtonPane() {
-                        HBox buttonPane = new HBox(modifierButton, supprimerButton);
-                        buttonPane.setSpacing(5);
-                        return buttonPane;
-                    }
-                };
+                MFXButton supprimerButton = new MFXButton("");
+                FontAwesomeIcon icon= new FontAwesomeIcon();
+                icon.setGlyphName("TRASH");
+                icon.setSize("23");
+                icon.setFill(Color.web("#bd2626"));
+                supprimerButton.setGraphic(icon);
+                supprimerButton.setId("delete_icon");
+                supprimerButton.getStyleClass().add("produit.css");
+                supprimerButton.setOnAction(event -> {
+                    supprimerProduit(produit);
+                    System.out.println("Supprimer produit avec l'ID : " + produit.getId());
+                });
+                setGraphic(supprimerButton);
             }
-        };
+        });
+        modifierColumn.setRowCellFactory(produit -> new MFXTableRowCell<>(data -> data.getId(), data -> {return null;}) {
+            {
+                setAlignment(Pos.CENTER);
+                setMinWidth(60);
+                MFXButton modifierButton = new MFXButton("");
+                FontAwesomeIcon icon= new FontAwesomeIcon();
+                icon.setGlyphName("EDIT");
+                icon.setSize("23");
+                icon.setFill(Color.web("#328D4CFF"));
+                modifierButton.setGraphic(icon);
+                modifierButton.setId("edit_icon");
+                modifierButton.getStyleClass().add("produit.css");
+                modifierButton.setOnAction(event -> {
+                    productId_modifier = produit.getId();
+                    System.out.println("ID produit " + produit.getId());
+                    modifier(produit);
+                    modifier_label.setText("Modifier le Produit "+produit.getId());
+                    // Logique pour la modification ici
+                    System.out.println("Modifier produit avec l'ID : " + produit.getId());
+                });
+                setGraphic(modifierButton);
+            }
+        });
+        idColumnProduit.setAlignment(Pos.CENTER);
+        idColumnProduit.setMinWidth(50);
+        designationColumn.setAlignment(Pos.CENTER);
+        designationColumn.setMinWidth(150);
+        quantiteColumn.setAlignment(Pos.CENTER);
+        quantiteColumn.setMinWidth(100);
+        prixColumn.setAlignment(Pos.CENTER);
+        prixColumn.setMinWidth(100);
+        dateColumn.setAlignment(Pos.CENTER);
+        dateColumn.setMinWidth(150);
+        peremptionColumn.setAlignment(Pos.CENTER);
+        prixColumn.setMinWidth(100);
+        ProduitsTable.getTableColumns().addAll(idColumnProduit, designationColumn,quantiteColumn,prixColumn,dateColumn,peremptionColumn,supprimerColumn,modifierColumn);
+        ProduitsTable.getFilters().addAll(
+                new StringFilter<>("Designation", Produit::getDesignation),
+                new IntegerFilter<>("Quantite", Produit::getQte),
+                new DoubleFilter<>("Prix", Produit::getPrix)
+
+        );
+    };
+    @FXML
+        public void initializeProduits() {
+        ObservableList<Produit> produitsList = FXCollections.observableArrayList(produitsDao.getProduitByCategorie(categorieNumber));
+        ProduitsTable.setItems(produitsList);
     }
+
+
+
+//    private Callback<TableColumn<Produit, Void>, TableCell<Produit, Void>> createButtonCellFactory() {
+//        return new Callback<TableColumn<Produit, Void>, TableCell<Produit, Void>>() {
+//            @Override
+//            public TableCell<Produit, Void> call(final TableColumn<Produit, Void> param) {
+//                return new TableCell<Produit, Void>() {
+//                    private final Button modifierButton = new Button("Modifier");
+//                    private final Button supprimerButton = new Button("Supprimer");
+//
+//                    {
+//                        modifierButton.setOnAction(event -> {
+//                            Produit produit = getTableView().getItems().get(getIndex());
+//                            productId_modifier = produit.getId();
+//                            System.out.println("ID produit " + produit.getId());
+//                            modifier(produit);
+//                            modifier_label.setText("Modifier le Produit "+produit.getId());
+//                            // Logique pour la modification ici
+//                            System.out.println("Modifier produit avec l'ID : " + produit.getId());
+//                        });
+//
+//                        supprimerButton.setOnAction(event -> {
+//                            Produit produit = getTableView().getItems().get(getIndex());
+//                            supprimerProduit(produit);
+//                            System.out.println("Supprimer produit avec l'ID : " + produit.getId());
+//                        });
+//                    }
+//
+//                    @Override
+//                    protected void updateItem(Void item, boolean empty) {
+//                        super.updateItem(item, empty);
+//
+//                        if (empty) {
+//                            setGraphic(null);
+//                        } else {
+//                            setGraphic(createButtonPane());
+//                        }
+//                    }
+//
+//                    private Pane createButtonPane() {
+//                        HBox buttonPane = new HBox(modifierButton, supprimerButton);
+//                        buttonPane.setSpacing(5);
+//                        return buttonPane;
+//                    }
+//                };
+//            }
+//        };
+//    }
 
     public void displayCategorie(String categorie){
         categorieLabel.setText("Catégorie: " + categorie);
     }
 
     //USER METHODS
+    public void setup_table_users(){
+        MFXTableColumn<User>  idColumn = new MFXTableColumn<>("Id", true);
+        MFXTableColumn<User> usernameColumn = new MFXTableColumn<>("Username", true);
+        MFXTableColumn<User> passwordColumn = new MFXTableColumn<>("Password", true);
+        MFXTableColumn<User> typeColumn = new MFXTableColumn<>("Type", true);
+
+        MFXTableColumn<User> supprimerColumn = new MFXTableColumn<>("Supprimer", true);
+        MFXTableColumn<User> modifierColumn = new MFXTableColumn<>("Modifier", true);
+
+        idColumn.setRowCellFactory(user -> new MFXTableRowCell<>(Backend.User.User::getId));
+        usernameColumn.setRowCellFactory(user -> new MFXTableRowCell<>(Backend.User.User::getUsername));
+        passwordColumn.setRowCellFactory(user -> new MFXTableRowCell<>(Backend.User.User::getPassword));
+        typeColumn.setRowCellFactory(user -> new MFXTableRowCell<>(Backend.User.User::getType));
+
+        supprimerColumn.setRowCellFactory(user -> new MFXTableRowCell<>(data -> data.getId(), data -> {return null;}) {
+            {
+                setAlignment(Pos.CENTER);
+                setMinWidth(60);
+
+                MFXButton supprimerUserButton = new MFXButton("");
+                FontAwesomeIcon icon= new FontAwesomeIcon();
+                icon.setGlyphName("TRASH");
+                icon.setSize("23");
+                supprimerUserButton.setStyle("-fx-background-color: transparent;\n" +
+                        "    -fx-padding: 0;");
+                icon.setFill(Color.web("#bd2626"));
+                supprimerUserButton.setGraphic(icon);
+//                supprimerUserButton.setId("delete_icon");
+//                supprimerUserButton.getStyleClass().add("produit.css");
+                supprimerUserButton.setOnAction(event -> {
+                    supprimerUser(user);
+                    System.out.println("Supprimer utilisateur avec l'ID : " + user.getId());
+                });
+                setGraphic(supprimerUserButton);
+            }
+        });
+        modifierColumn.setRowCellFactory(user -> new MFXTableRowCell<>(data -> data.getId(), data -> {return null;}) {
+            {
+                setAlignment(Pos.CENTER);
+                setMinWidth(60);
+                MFXButton modifierUserButton = new MFXButton("");
+                FontAwesomeIcon icon= new FontAwesomeIcon();
+                modifierUserButton.setStyle("-fx-background-color: transparent;\n" +
+                        "    -fx-padding: 0;");
+                icon.setGlyphName("EDIT");
+                icon.setSize("23");
+                icon.setFill(Color.web("#328D4CFF"));
+                modifierUserButton.setGraphic(icon);
+//                modifierUserButton.setId("edit_icon");
+//                modifierUserButton.getStyleClass().add("produit.css");
+                modifierUserButton.setOnAction(event -> {
+                    userId_modifier = user.getId();
+                    modifierUser(user);
+                    modifierUser_label.setText("Modifier l'Utilisateur "+user.getId());
+                    System.out.println("Modifier utilisateur avec l'ID : " + user.getId());
+                });
+                setGraphic(modifierUserButton);
+            }
+        });
+        idColumn.setAlignment(Pos.CENTER);
+        idColumn.setMinWidth(50);
+        usernameColumn.setAlignment(Pos.CENTER);
+        usernameColumn.setMinWidth(150);
+        passwordColumn.setAlignment(Pos.CENTER);
+        passwordColumn.setMinWidth(150);
+        typeColumn.setAlignment(Pos.CENTER);
+        typeColumn.setMinWidth(100);
+
+        usersTable.getTableColumns().addAll(idColumn, usernameColumn,passwordColumn,typeColumn,supprimerColumn,modifierColumn);
+        usersTable.getFilters().addAll(
+                new IntegerFilter<>("Id", User::getId),
+                new StringFilter<>("Username", User::getUsername),
+                new StringFilter<>("Prix", User::getPassword),
+                new StringFilter<>("Type",User::getType)
+
+        );
+    };
     public void initializeUsers() {
-        // Set up cell value factories for each column
-        idColumn.setCellValueFactory(new PropertyValueFactory<User, Integer>("id"));
-        usernameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("username"));
-        passwordColumn.setCellValueFactory(new PropertyValueFactory<User, String>("password"));
-        typeColumn.setCellValueFactory(new PropertyValueFactory<User, String>("type"));
+
 
         // Fetch data from DAO
         ObservableList<User> usersList = FXCollections.observableList(userDao.getAll());
@@ -291,66 +441,64 @@ public class ApplicationController implements Initializable{
         // Populate the TableView with data
         usersTable.setItems(usersList);
 
-        // Add event handlers to the existing "Actions" column buttons
-        addActionsColumnEventHandlers();
     }
 
-    private void addActionsColumnEventHandlers() {
-        // Assuming you have a column named "actionsColumn" in your FXML
-        TableColumn<User, Void> actionsColumn = (TableColumn<User, Void>) usersTable.getColumns().stream()
-                .filter(column -> "actionsColumn".equals(column.getId()))
-                .findFirst()
-                .orElse(null);
-
-        if (actionsColumn != null) {
-            // Set up a cell factory for the actions column
-            Callback<TableColumn<User, Void>, TableCell<User, Void>> cellFactory = (TableColumn<User, Void> param) -> {
-                final TableCell<User, Void> cell = new TableCell<User, Void>() {
-                    private final Button editButton = new Button("Modifier");
-                    private final Button deleteButton = new Button("Supprimer");
-
-                    {
-                        // Add an event handler to the "Modifier" button
-                        editButton.setOnAction(event -> {
-                            User user = getTableView().getItems().get(getIndex());
-                            //Produit produit = getTableView().getItems().get(getIndex());
-                            //productId_modifier = produit.getId();
-                            //System.out.println("ID produit " + produit.getId());
-                            userId_modifier = user.getId();
-                            modifierUser(user);
-                            modifierUser_label.setText("Modifier l'Utilisateur "+user.getId());
-                            System.out.println("Modifier utilisateur avec l'ID : " + user.getId());
-                        });
-
-                        // Add an event handler to the "Supprimer" button
-                        deleteButton.setOnAction(event -> {
-                            User user = getTableView().getItems().get(getIndex());
-                            supprimerUser(user);
-                            System.out.println("Supprimer utilisateur avec l'ID : " + user.getId());
-                        });
-
-                        // Set the buttons as the graphic for the cell
-                        setGraphic(new HBox(editButton, deleteButton));
-                    }
-
-                    @Override
-                    protected void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-
-                        // Make sure the cell is empty
-                        if (empty) {
-                            setGraphic(null);
-                        }
-                    }
-                };
-
-                return cell;
-            };
-
-            // Set the custom cell factory for the actions column
-            actionsColumn.setCellFactory(cellFactory);
-        }
-    }
+//    private void addActionsColumnEventHandlers() {
+//        // Assuming you have a column named "actionsColumn" in your FXML
+//        TableColumn<User, Void> actionsColumn = (TableColumn<User, Void>) usersTable.getColumns().stream()
+//                .filter(column -> "actionsColumn".equals(column.getId()))
+//                .findFirst()
+//                .orElse(null);
+//
+//        if (actionsColumn != null) {
+//            // Set up a cell factory for the actions column
+//            Callback<TableColumn<User, Void>, TableCell<User, Void>> cellFactory = (TableColumn<User, Void> param) -> {
+//                final TableCell<User, Void> cell = new TableCell<User, Void>() {
+//                    private final Button editButton = new Button("Modifier");
+//                    private final Button deleteButton = new Button("Supprimer");
+//
+//                    {
+//                        // Add an event handler to the "Modifier" button
+//                        editButton.setOnAction(event -> {
+//                            User user = getTableView().getItems().get(getIndex());
+//                            //Produit produit = getTableView().getItems().get(getIndex());
+//                            //productId_modifier = produit.getId();
+//                            //System.out.println("ID produit " + produit.getId());
+//                            userId_modifier = user.getId();
+//                            modifierUser(user);
+//                            modifierUser_label.setText("Modifier l'Utilisateur "+user.getId());
+//                            System.out.println("Modifier utilisateur avec l'ID : " + user.getId());
+//                        });
+//
+//                        // Add an event handler to the "Supprimer" button
+//                        deleteButton.setOnAction(event -> {
+//                            User user = getTableView().getItems().get(getIndex());
+//                            supprimerUser(user);
+//                            System.out.println("Supprimer utilisateur avec l'ID : " + user.getId());
+//                        });
+//
+//                        // Set the buttons as the graphic for the cell
+//                        setGraphic(new HBox(editButton, deleteButton));
+//                    }
+//
+//                    @Override
+//                    protected void updateItem(Void item, boolean empty) {
+//                        super.updateItem(item, empty);
+//
+//                        // Make sure the cell is empty
+//                        if (empty) {
+//                            setGraphic(null);
+//                        }
+//                    }
+//                };
+//
+//                return cell;
+//            };
+//
+//            // Set the custom cell factory for the actions column
+//            actionsColumn.setCellFactory(cellFactory);
+//        }
+//    }
 
 
     public void SignOut(ActionEvent event) throws IOException {
@@ -403,6 +551,10 @@ public class ApplicationController implements Initializable{
             System.out.println("designation error");
             flag+=1;
         }
+        else {
+            designation_rule.setText("");
+        }
+
 
         // Validate Quantite
         if (quantiteText.isEmpty()) {
@@ -415,6 +567,9 @@ public class ApplicationController implements Initializable{
                 if (qte <= 0) {
                     quantite_rule.setText("le nombre doit être positif!");
                     flag+=1;
+                }
+                else {
+                    quantite_rule.setText("");
                 }
             } catch (NumberFormatException e) {
                 // Handle error: Quantity should be a valid integer
@@ -435,6 +590,9 @@ public class ApplicationController implements Initializable{
                     prix_rule.setText("le nombre doit être positif!");
                     flag+=1;
                 }
+                else {
+                    prix_rule.setText("");
+                }
             } catch (NumberFormatException e) {
                 quantite_rule.setText("Vous devez taper un nombre!");
                 flag+=1;
@@ -445,6 +603,9 @@ public class ApplicationController implements Initializable{
         if (date == null ){
             date_rule.setText("Vous devez fournir la date d'entrée!");
             flag+=1;
+        }
+        else {
+            date_rule.setText("");
         }
         if(flag != 0) return false;
         else return true;
@@ -546,6 +707,7 @@ public class ApplicationController implements Initializable{
             flag += 1;
         }
 
+
         if (password.isEmpty()) {
             modifierPassword_rule.setText("Vous devez fournir le password");
             flag += 1;
@@ -562,10 +724,13 @@ public class ApplicationController implements Initializable{
 
 
     public void ValiderProduit() {
+        System.out.println(rules());
         if(rules()){
+
             int categoryId = categorieNumber;
             String designation = designation_field.getText();
             int qte = Integer.parseInt(quantite_field.getText());
+
             Float prix = Float.parseFloat(prix_field.getText());
             LocalDate date = date_field.getValue();
             LocalDate peremption = peremption_field.getValue();
@@ -574,6 +739,7 @@ public class ApplicationController implements Initializable{
             produitsDao.add(p);
             products_pane.toFront();
             initializeProduits();
+            System.out.println("le produit est ajouter");
         }
     }
     public void validerUser() {

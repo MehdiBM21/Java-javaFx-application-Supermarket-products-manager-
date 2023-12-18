@@ -13,9 +13,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -42,11 +40,11 @@ public class LoginController implements Initializable {
     @FXML
     private Label label;
     @FXML
-    private JFXButton loginButton;
+    private Button loginButton;
     @FXML
-    private JFXTextField usernameField;
+    private TextField usernameField;
     @FXML
-    private JFXPasswordField passwordField;
+    private TextField passwordField;
 
     private UserDaoImpl userDao = new UserDaoImpl();
 
@@ -93,6 +91,7 @@ public class LoginController implements Initializable {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         if(alert.showAndWait().get()== ButtonType.OK){
             stage.close();
+
         }
     }
 
@@ -133,6 +132,9 @@ public class LoginController implements Initializable {
 
         });
 
+    }
+    public void minimize_window(ActionEvent event){
+        ((Stage)((Button)event.getSource()).getScene().getWindow()).setIconified(true);
     }
 }
 

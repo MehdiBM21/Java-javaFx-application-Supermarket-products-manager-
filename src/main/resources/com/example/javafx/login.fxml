@@ -1,41 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXPasswordField?>
-<?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="main_pan" cache="true" prefHeight="436.0" prefWidth="300.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafx.LoginController">
+<AnchorPane fx:id="main_pan" cache="true" focusTraversable="true" prefHeight="436.0" prefWidth="300.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafx.LoginController">
    <children>
-      <AnchorPane fx:id="topBar" prefHeight="42.0" prefWidth="451.0">
+      <AnchorPane fx:id="topBar" prefHeight="42.0" prefWidth="451.0" styleClass="top-bar">
          <children>
-            <HBox fx:id="hbox" alignment="CENTER_RIGHT" blendMode="SCREEN" cache="true" cacheHint="SCALE" prefHeight="45.0" prefWidth="451.0" spacing="190.0" stylesheets="@login.css">
+            <HBox fx:id="hbox" alignment="CENTER_RIGHT" blendMode="SCREEN" cache="true" cacheHint="SCALE" prefHeight="45.0" prefWidth="451.0" spacing="5.0" stylesheets="@login.css">
                <children>
-                  <Label contentDisplay="RIGHT" prefHeight="22.0" prefWidth="178.0" style="-fx-text-fill: #d7d0d0;" text="My Supermarket" textFill="#d7d0d0">
-                     <font>
-                        <Font name="Calibri Bold" size="19.0" />
-                     </font>
+                  <Button cancelButton="true" focusTraversable="false" maxWidth="54.0" minWidth="26.0" mnemonicParsing="false" onAction="#minimize_window" prefHeight="31.0" prefWidth="26.0" styleClass="top-bar-buttons" textFill="WHITE">
                      <HBox.margin>
-                        <Insets top="6.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Button fx:id="close_button" cancelButton="true" focusTraversable="false" maxWidth="54.0" minWidth="37.0" mnemonicParsing="false" onAction="#close" prefHeight="31.0" prefWidth="54.0" textFill="WHITE">
-                     <graphic>
-                        <FontAwesomeIcon fill="WHITE" fontSmoothingType="LCD" glyphName="CLOSE" selectionFill="#363434" size="21px" text="" wrappingWidth="17.314199924468994">
-                           <font>
-                              <Font size="29.0" />
-                           </font>
-                        </FontAwesomeIcon>
-                     </graphic>
-                     <HBox.margin>
-                        <Insets right="15.0" top="4.0" />
+                        <Insets />
                      </HBox.margin>
                      <font>
                         <Font size="13.0" />
@@ -46,36 +35,101 @@
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
+                     <graphic>
+                        <Circle fill="#ffcc00" radius="7.0" stroke="#ffcc00" strokeType="INSIDE" />
+                     </graphic>
 
+                  </Button>
+                  <Button fx:id="close_button1" cancelButton="true" focusTraversable="false" maxWidth="54.0" minWidth="28.0" mnemonicParsing="false" onAction="#close" prefHeight="31.0" prefWidth="26.0" styleClass="top-bar-buttons" textFill="WHITE">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <graphic>
+                        <Circle fill="#ff1b00" radius="7.0" stroke="#ff1b00" strokeType="INSIDE" />
+                     </graphic>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
                   </Button>
                </children>
                <cursor>
                   <Cursor fx:constant="OPEN_HAND" />
                </cursor>
+               <padding>
+                  <Insets right="15.0" top="4.0" />
+               </padding>
             </HBox>
          </children>
       </AnchorPane>
-      <Label fx:id="label" alignment="TOP_LEFT" layoutX="111.0" layoutY="303.0" prefHeight="20.0" prefWidth="248.0" textFill="#ea6262">
+      <Label fx:id="label" alignment="TOP_LEFT" layoutX="77.0" layoutY="316.0" prefHeight="20.0" prefWidth="248.0" textFill="#ea6262">
          <font>
             <Font name="Calibri Bold" size="14.0" />
          </font>
       </Label>
-      <JFXButton fx:id="loginButton" alignment="CENTER" buttonType="RAISED" layoutX="160.0" layoutY="363.0" onAction="#login" prefHeight="46.0" prefWidth="115.0" ripplerFill="#fc6d00" stylesheets="@login.css" text="Login" textFill="WHITE" viewOrder="100.0">
+      <FontAwesomeIcon fill="SILVER" glyphName="USER" layoutX="83.0" layoutY="286.0" selectionFill="#afafcd" size="27" text="" />
+      <MFXTextField fx:id="usernameField" borderGap="5.0" floatMode="BORDER" floatingText="Username" floatingTextGap="0.0" layoutX="77.0" layoutY="154.0" nodeOrientation="LEFT_TO_RIGHT" onAction="#nextPassword" prefHeight="62.0" prefWidth="282.0" styleClass="mfx-text-field">
          <font>
-            <Font size="20.0" />
+            <Font name="Roboto Bold" size="16.0" />
          </font>
+         <textFill>
+            <Color red="1.0" green="1.0" blue="1.0" opacity="0.8700000047683716" />
+         </textFill>
+         <padding>
+            <Insets left="50.0" top="12.0" />
+         </padding>
+      </MFXTextField>
+      <FontAwesomeIcon fill="SILVER" fontSmoothingType="LCD" glyphName="KEY" layoutX="80.0" layoutY="194.0" selectionFill="#afafcd" size="27" text="" wrappingWidth="26.399999999999864" x="4.0" />
+      <MFXPasswordField fx:id="passwordField" allowCut="true" allowPaste="true" borderGap="5.0" floatMode="BORDER" floatingText="Password" floatingTextGap="0.0" graphicTextGap="0.0" hideCharacter="*" layoutX="76.0" layoutY="240.0" onAction="#nextLogin" prefHeight="62.0" prefWidth="282.0" styleClass="mfx-text-field">
+         <padding>
+            <Insets left="50.0" top="12.0" />
+         </padding>
+      </MFXPasswordField>
+      <MFXButton fx:id="loginButton" buttonType="RAISED" depthLevel="LEVEL5" layoutX="110.0" layoutY="365.0" onAction="#login" prefHeight="46.0" prefWidth="230.0" rippleAnimateShadow="true" rippleAnimationSpeed="0.7" rippleBackgroundOpacity="0.6" rippleRadiusMultiplier="3.0" text="Login" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
-      </JFXButton>
-      <FontAwesomeIcon fill="#fffcfc" glyphName="LOCK" layoutX="200.0" layoutY="110.0" size="55" />
-      <FontAwesomeIcon fill="SILVER" glyphName="KEY" layoutX="42.0" layoutY="284.0" size="30" text="" />
-      <FontAwesomeIcon fill="SILVER" glyphName="USER" layoutX="42.0" layoutY="199.0" size="30" text="" />
-      <JFXTextField fx:id="usernameField" cache="true" focusColor="#e1e1e1" labelFloat="true" layoutX="84.0" layoutY="158.0" onAction="#nextPassword" prefHeight="46.0" prefWidth="282.0" promptText="Username" unFocusColor="#2f323b">
+         <rippleColor>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.6066666841506958" blue="0.9578947424888611" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.006729475100942127">
+                     <color>
+                        <Color red="0.6066666841506958" blue="0.9578947424888611" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.43648360305944917">
+                     <color>
+                        <Color red="0.9100000262260437" green="0.018200000748038292" blue="0.5716138482093811" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.7227456258411843">
+                     <color>
+                        <Color red="0.8421052694320679" green="0.2495126724243164" blue="0.2692657709121704" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9052631855010986" green="0.3051072061061859" blue="0.3351150155067444" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </rippleColor>
+      </MFXButton>
+      <Label alignment="CENTER" layoutX="109.0" layoutY="46.0" prefHeight="94.0" prefWidth="215.0" text="Log in" textFill="#e9e9f9">
          <font>
-            <Font name="Calibri" size="16.0" />
+            <Font name="Roboto Medium" size="38.0" />
          </font>
-      </JFXTextField>
-      <JFXPasswordField fx:id="passwordField" focusColor="#e1e1e1" labelFloat="true" layoutX="84.0" layoutY="243.0" onAction="#nextLogin" prefHeight="46.0" prefWidth="282.0" promptText="Password" unFocusColor="#2f323b" />
+      </Label>
    </children>
 </AnchorPane>

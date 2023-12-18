@@ -1,28 +1,73 @@
 *{
-    -fx-mainColor:#2F323B;
-    -fx-secondColor:#23262D;
-    -fx-thirdColor:#E7842A;
+    -fx-mainColor:#212141 ;
+    -fx-secondColor:#0C0C28;
+    -fx-thirdColor:#5C59FD;
+    -fx-fourthColor:#D5E0FF;
+    -fx-textColor:#E9E9F9;
+
+    -fx-labelColor:#5F5DC7;
 }
 .root{
 
+    --block-font-family: 'roboto';
+    -fx-font-weight: bold;
+    -fx-background-color: -fx-mainColor;
 }
-#hbox{
-    -fx-background-color: #444444;
+
+/*    \\\\\\\\\\\\\\\\\\\\\\\\        top bar  with close and minimise buttons           /////////////////////// */
+.top-bar {
+    -fx-background-color: transparent;
     -fx-background-radius: 20px 20px 0 0;
 }
-#close_button{
+.top-bar .top-bar-buttons{
     -fx-background-color: transparent;
     -fx-max-width: 33px;
 
 
 }
-#close_button:hover{
-    -fx-background-color: #f34986;
+.top-bar .top-bar-buttons:hover{
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
 }
+/*   \\\\\\\\\\\\\\\\\\\\\\   customizing the  side-bar    ////////////////////////////////////   */
+
+#sideBar{
+    -fx-background-radius: 20px 10px 10px 20px ;
+    -fx-background-color: -fx-secondColor;
+}
+#sideBar #sideBar_vbox .button ,#signout_Btn{
+    -fx-background-radius: 14px ;
+    -fx-background-color: transparent;
+    -fx-text-fill:-fx-textColor ;
+    -fx-font-size: 20px;
+    -fx-alignment: BASELINE_LEFT;
+    -fx-graphic-text-gap: 18;
+    -fx-padding: 0 0 0 15px ;
+    -fx-cursor: hand;
+}
+#sideBar #sideBar_vbox .button:hover, #signout_Btn:hover{
+
+    -fx-background-color: -fx-mainColor;
+
+}
+#sideBar #sideBar_vbox .button:focused ,.button:hover {
+    -fx-background-color: -fx-thirdColor;
+}
+#sideBar #sideBar_vbox .button:pressed {
+
+    -fx-background-color:linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #9b00f4 0.0%, #9b00f4 0.6729%, #e80592 43.6484%, #d74045 72.2746%, #e74e55 100.0%)
+}
+.mfx-button .mfx-ripple-generator{
+    -fx-background-radius: 14px ;
+}
+#signout_Btn:focused{
+    -fx-background-color: #d02e24;
+}
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\          main anchor pane            /////////////////////////////////////////////////////*/
 #main_pan{
     -fx-border-radius: 20px;
     -fx-background-radius: 20px;
-    -fx-background-color:#2F323B ;
+
 }
 
 #content_pane, #products_pane, #users_pane, #dashboard_pane, #addProduct_pane, #modifierProduct_pane,
@@ -31,249 +76,109 @@
     -fx-background-radius: 0 0 20px 0;
     -fx-background-color: -fx-mainColor;
 }
-#sideBar{
-    -fx-background-radius: 0 10px 10px 20px ;
-    -fx-background-color: -fx-secondColor;
- }
-#sideBar #sideBar_vbox .button{
-    -fx-background-radius: 16px ;
+
+/* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\   table-view     ///////////////////////////////*/
+
+.mfx-table-view {
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+    -fx-border-width:0px;
 }
-#sideBar #sideBar_vbox .button:focused ,.button:hover {
-    -fx-background-color: -fx-thirdColor;
+.mfx-table-view .columns-container  {
+    -fx-border-width: 0;
+    -fx-background-radius: 10 10 0 0;
+    -fx-background-color: linear-gradient(to bottom right, #2f466b, #662d60);
 }
-#sideBar #sideBar_vbox .button:pressed {
-    -fx-background-color: radial-gradient(focus-angle 0.0deg, focus-distance 0.0% , center 50.0% 50.0%, radius 50.0%, #4e96d1 0.0%, #4e96d1 0.6729%, #8869b2 32.4361%, #561db1 70.5538%, #291b6e 95.744%, #291b6e 100.0%)
-}
-
-/*-------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------
- */
-
-/* Categorie 1 */
-/*#background{
-    -fx-background-color: #E8E8E8;
-}*/
-
-/* Categorie 1 */
-#categorie1 .button{
-    -fx-background-color: linear-gradient(to bottom right, #FF5733, #FFC300);
-    -fx-background-radius: 20;
-}
-
-/* Au survol de la souris pour Categorie 1 */
-#categorie1:hover {
-    -fx-background-color: linear-gradient(to bottom right, #FF8C66, #FFE680);
-}
-
-/* Au clic de la souris pour Categorie 1 */
-#categorie1:pressed {
-    -fx-background-color: linear-gradient(to bottom right, #FF5733, #FFC300);
-}
-
-/* Categorie 2 */
-#categorie2 {
-    -fx-background-color: linear-gradient(to bottom right, #4CAF50, #8AE43A);
-    -fx-background-radius: 20;
-}
-
-/* Au survol de la souris pour Categorie 2 */
-#categorie2:hover {
-    -fx-background-color: linear-gradient(to bottom right, #6EDD84, #A3F3A1);
-}
-
-/* Au clic de la souris pour Categorie 2 */
-#categorie2:pressed {
-    -fx-background-color: linear-gradient(to bottom right, #4CAF50, #8AE43A);
-}
-
-/* Categorie 3 */
-#categorie3 {
-    -fx-background-color: linear-gradient(to bottom right, #9B59B6, #D2527F);
-    -fx-background-radius: 20;
-}
-
-/* Au survol de la souris pour Categorie 3 */
-#categorie3:hover {
-    -fx-background-color: linear-gradient(to bottom right, #B583C6, #E095A6);
-}
-
-/* Au clic de la souris pour Categorie 3 */
-#categorie3:pressed {
-    -fx-background-color: linear-gradient(to bottom right, #9B59B6, #D2527F);
-}
-
-/* Categorie 4 */
-#categorie4 {
-    -fx-background-color: linear-gradient(to bottom right, #3498DB, #5D8CAE);
-    -fx-background-radius: 20;
-}
-
-/* Au survol de la souris pour Categorie 4 */
-#categorie4:hover {
-    -fx-background-color: linear-gradient(to bottom right, #5FABE1, #8CB4D4);
-}
-
-/* Au clic de la souris pour Categorie 4 */
-#categorie4:pressed {
-    -fx-background-color: linear-gradient(to bottom right, #3498DB, #5D8CAE);
-}
-
-/* Categorie 5 */
-#categorie5 {
-    -fx-background-color: linear-gradient(to bottom right, #E74C3C, #F1948A);
-    -fx-background-radius: 20;
-}
-
-/* Au survol de la souris pour Categorie 5 */
-#categorie5:hover {
-    -fx-background-color: linear-gradient(to bottom right, #EC7260, #F7BFA4);
-}
-
-/* Au clic de la souris pour Categorie 5 */
-#categorie5:pressed {
-    -fx-background-color: linear-gradient(to bottom right, #E74C3C, #F1948A);
-}
-
-/* Categorie 6 */
-#categorie6 {
-    -fx-background-color: linear-gradient(to bottom right, #2E86C1, #3498DB);
-    -fx-background-radius: 20;
-}
-
-/* Au survol de la souris pour Categorie 6 */
-#categorie6:hover {
-    -fx-background-color: linear-gradient(to bottom right, #559CD5, #7AAFD9);
-}
-
-/* Au clic de la souris pour Categorie 6 */
-#categorie6:pressed {
-    -fx-background-color: linear-gradient(to bottom right, #2E86C1, #3498DB);
-}
-
-/* Categorie 7 */
-#plus {
-    -fx-background-color: linear-gradient(to bottom right, #27AE60, #58D68D);
-    -fx-background-radius: 20;
-}
-
-/* Au survol de la souris pour Categorie 7 */
-#plus:hover {
-    -fx-background-color: linear-gradient(to bottom right, #4BB174, #7EDFA6);
-}
-
-/* Au clic de la souris pour Categorie 7 */
-#plus:pressed {
-    -fx-background-color: linear-gradient(to bottom right, #27AE60, #58D68D);
-}
-
-/*#sidebar {*/
-/*    -fx-background-color: #111B4E;*/
-/*}*/
-/*#sidebarContainer{*/
-/*    !*-fx-alignment: center;*!*/
-/*    -fx-spacing: 10;*/
-/*}*/
-/*!* #dashboard *!*/
-/*#dashboard {*/
-/*    -fx-background-color: #111B4E;*/
-/*}*/
-
-/*!* Au clic de la souris pour #dashboard *!*/
-/*#dashboard:pressed {*/
-/*    -fx-background-color: #192A56; !* Adjust as needed *!*/
-/*}*/
-/*#in{*/
-/*    -fx-background-color: #2c4987;*/
-/*}*/
-
-/*!* #users *!*/
-/*#users {*/
-/*    -fx-background-color: #111B4E;*/
-/*}*/
-
-/*!* Au clic de la souris pour #users *!*/
-/*#users:pressed {*/
-/*    -fx-background-color: #192A56; !* Adjust as needed *!*/
-/*}*/
-
-/*!* #admin *!*/
-/*#admin {*/
-/*    -fx-background-color: #111B4E;*/
-/*}*/
-
-/*!* Au clic de la souris pour #admin *!*/
-/*#admin:pressed {*/
-/*    -fx-background-color: #192A56; !* Adjust as needed *!*/
-/*}*/
-
-/*!* #logout *!*/
-/*#logout {*/
-/*    -fx-background-color: #111B4E;*/
-/*    -fx-background-radius: 15;*/
-/*}*/
-
-/*!* Au clic de la souris pour #logout *!*/
-/*#logout:pressed {*/
-/*    -fx-background-color: #940606; !* Adjust as needed *!*/
-/*}*/
-
-#categoriesContainer{
-    -fx-spacing: 10;
-}
-/*add products CSS*/
-#addProduct_pane .text-field,#produitSearch_field, #date_field, #peremption_field,
-#modifierProduct_pane .text-field, #modifierDate_field, #modifierPeremption_field,
-#addUser_pane .text-field, #modifierUser_pane .text-field,
-#addCategory_pane .text-field{
-    -fx-text-fill: #fcfcfc;
-    -fx-prompt-text-fill: #C0C0C0;
-    -fx-padding: 0 0 0 10px;
-    -fx-background-radius:13px ;
-    -fx-background-color: #23262D;
-    -fx-font-size:16px;
-    -fx-font-family: Calibri;
+.mfx-table-column {
+    -fx-border-width: 0;
+    -fx-text-fill: white;
     -fx-font-weight: bold;
+    -fx-font-size: 16;
+    -fx-font-family: roboto;
+}
+.mfx-table-column:hover, .mfx-table-column:dragged {
+    -fx-border-color: transparent gray  transparent transparent;
+    -fx-border-width:  1px ;
+}
+.mfx-table-row:hover {
+    -fx-background-color: #D5E0FF;
+}
+.mfx-table-row:selected{
+    -fx-background-color: #94b0fa;
+}
+.mfx-table-row .mfx-ripple-generator {
+    -mfx-ripple-radius: 20;
+    -mfx-ripple-color: #ec9773;
+}
+.mfx-table-row-cell {
+    -fx-font-family: roboto;
+    -fx-font-size: 13px;
+}
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  text field  ///////////////////////////////////////*/
+.titles{
+    /*-fx-text-fill: -fx-labelColor;*/
+    -fx-font-size: 31px;
+    -fx-text-fill: -fx-textColor;
 
 }
-#addProduct_pane .text-field:focused, #produitSearch_field, #modifierProduct_pane .text-field:focused,
-#addCategory_pane .text-field:focused,#addUser_pane .text-field:focused, #modifierUser_pane .text-field:focused{
-    -fx-padding: 7px 0 0 1px;
-    -fx-background-radius:13px 13px 0 0 ;
 
+
+.mfx-text-field,.mfx-date-picker  {
+    -fx-font-size:16px ;
+    -fx-font-weight: bold;
+    -fx-font-family:"Roboto";
+
+    -fx-border-width: 0 0 3px 0;
+    -px-padding:0 0 -8px 3px;
+    -fx-border-radius: 0;
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+
+
+
+}
+.mfx-text-field .floating-text ,.mfx-date-picker .floating-text{
+    -fx-background-color: transparent;
+
+    -fx-text-fill: #a9a9a9;
 
 }
 
-#valider_btn, #modifierValider_btn{
-    -fx-border-radius: 30px;
-    -fx-background-radius: 30px;
-    -fx-padding: 15px;
-    -fx-background-color: #E7842A;
-    -fx-font-size:21px;
-    -fx-font-family: Calibri;
-    -fx-font-weight: bolder;
-    -fx-border-width: 2px;
-    -fx-transition-duration:2s;
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\  buttons  ///////////////////////////////////*/
 
+.mfx-button{
+    -fx-padding: 10px 13px 10px 13px;
+
+    -fx-font-size: 17px;
+    -fx-cursor: hand;
+    -fx-background-radius: 10px;
 }
-#valider_btn:hover, #modifierValider_btn:hover{
-    -fx-scale-x: 1.1;
-    -fx-scale-y:1.1;
-
+.annuler_buttons{
+    -fx-background-color:#EE5C55 ;
 }
-
-#dashboard_pane .button {
-    -fx-background-color: linear-gradient(to bottom right, #D4AF37, #FFD700);
-    -fx-background-radius: 20;
-    -fx-font-family: "Arial Rounded MT Bold";
-    -fx-font-size: 14px;
+.annuler_buttons:hover{
+    -fx-background-color:#E1221C ;
+    -fx-rotate: -2;
 }
+.valider_buttons{
 
-/* Au survol de la souris pour #dashboard_pane .button */
-#dashboard_pane .button:hover {
-    -fx-background-color: linear-gradient(to bottom right, #A08E2D, #CCB745); /* Dark yellow gradient on click *//* Yellow gradient on hover */
+    -fx-background-color: #004B88;
 }
-
-/* Au clic de la souris pour #dashboard_pane .button */
-#dashboard_pane .button:pressed {
-    -fx-background-color: linear-gradient(to bottom right, #343434, #565656); /* Restore original colors on click */
+.valider_buttons:hover{
+    -fx-rotate:2 ;
+    -fx-background-color: #001546;
+}
+.valider_buttons:pressed ,.annuler_buttons:pressed{
+    -fx-background-color:linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #3cac3e 0.0%, #6fb14b 0.6729%, #0cc296 38.8084%, #1185c4 71.6016%, #4a51d1 100.0%)
+}
+.add_buttons{
+    -fx-background-color:#6FB14BFF ;
+}
+.add_buttons:hover{
+    -fx-background-color:#3CAC3EFF ;
+    -fx-rotate: -2;
+}
+/*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ scroll pane in categories pane /////////////////////////////////*/
+#scroll_pane_categories{
+    -fx-background-color: transparent;
 }

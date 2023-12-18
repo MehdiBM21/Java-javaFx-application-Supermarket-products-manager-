@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 @Data
 public class Produit {
+
     private int id;
     private int idCategorie;
     private String designation;
@@ -33,6 +34,31 @@ public class Produit {
         this.peremption=peremption;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public int getIdCategorie() {
+        return idCategorie;
+    }
 
+    public String getDesignation() {
+        return designation;
+    }
+
+    public int getQte() {
+        return qte;
+    }
+
+    public double getPrix() {
+        return prix;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public LocalDate getPeremption() {
+        return peremption;
+    }
 }

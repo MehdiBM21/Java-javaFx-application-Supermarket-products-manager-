@@ -127,7 +127,7 @@ public class UserDaoImpl extends AbstractDao implements IUserDao {
         List<User> list = new ArrayList<>();
         PreparedStatement pst = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM user WHERE username = ? AND password = ?";
+        String sql = "SELECT * FROM user WHERE username = ? AND BINARY password = ?";
 
         try {
             pst = connection.prepareStatement(sql);

@@ -551,9 +551,6 @@ public class ApplicationController implements Initializable{
             System.out.println("designation error");
             flag+=1;
         }
-        else {
-            designation_rule.setText("");
-        }
 
 
         // Validate Quantite
@@ -568,9 +565,7 @@ public class ApplicationController implements Initializable{
                     quantite_rule.setText("le nombre doit être positif!");
                     flag+=1;
                 }
-                else {
-                    quantite_rule.setText("");
-                }
+
             } catch (NumberFormatException e) {
                 // Handle error: Quantity should be a valid integer
                 quantite_rule.setText("Vous devez taper un entier!");
@@ -590,9 +585,6 @@ public class ApplicationController implements Initializable{
                     prix_rule.setText("le nombre doit être positif!");
                     flag+=1;
                 }
-                else {
-                    prix_rule.setText("");
-                }
             } catch (NumberFormatException e) {
                 quantite_rule.setText("Vous devez taper un nombre!");
                 flag+=1;
@@ -604,11 +596,7 @@ public class ApplicationController implements Initializable{
             date_rule.setText("Vous devez fournir la date d'entrée!");
             flag+=1;
         }
-        else {
-            date_rule.setText("");
-        }
-        if(flag != 0) return false;
-        else return true;
+        return flag == 0;
     }
     private Boolean userRules(){
         String username = username_field.getText();
@@ -736,6 +724,7 @@ public class ApplicationController implements Initializable{
             LocalDate peremption = peremption_field.getValue();
             //TODO :: add the conditions for peremption = null
             Produit p = new Produit(categoryId, designation, qte, prix, date, peremption);
+
             produitsDao.add(p);
             products_pane.toFront();
             initializeProduits();
@@ -759,6 +748,11 @@ public class ApplicationController implements Initializable{
         modifierPrix_field.setText(String.valueOf(p.getPrix()));
         modifierDate_field.setValue(p.getDate());
         modifierPeremption_field.setValue(p.getPeremption());
+        modifierDesignation_rule.setText("");
+        modifierQuantite_rule.setText("");
+        modifierPrix_rule.setText("");
+        modifierDate_rule.setText("");
+        modifierPeremption_rule.setText("");
         modifierProduct_pane.toFront();
     }
     public void modifierUser(User user){

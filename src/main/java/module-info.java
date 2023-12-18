@@ -16,9 +16,5 @@ module com.example.javafx {
     opens Backend.User;
     opens Backend.Dao;
     exports com.example.javafx;
-    exports login;
-    opens login to javafx.fxml;
-    exports tmp;
-    opens tmp to javafx.fxml;
     opens Backend;
 }

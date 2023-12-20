@@ -470,7 +470,7 @@
             </Pane>
             <Pane fx:id="dashboard_pane" prefHeight="618.0" prefWidth="906.0">
                <children>
-                  <JFXButton fx:id="refreshCategories_btn" alignment="CENTER" buttonType="RAISED" graphicTextGap="10.0" layoutX="71.0" layoutY="540.0" onAction="#refreshCategory" prefHeight="59.0" prefWidth="348.0" ripplerFill="WHITE" text="REFRESH" textFill="WHITE">
+                  <JFXButton fx:id="refreshCategories_btn" alignment="CENTER" buttonType="RAISED" graphicTextGap="10.0" layoutX="73.0" layoutY="545.0" onAction="#refreshCategory" prefHeight="59.0" prefWidth="348.0" ripplerFill="WHITE" text="REFRESH" textFill="WHITE">
                      <graphic>
                         <FontAwesomeIcon fx:id="refresh_icon3" fill="WHITE" glyphName="REFRESH" size="25px">
                            <font>
@@ -482,7 +482,7 @@
                         <Font name="Calibri" size="24.0" />
                      </font>
                      <padding>
-                        <Insets left="14.0" top="10.0" />
+                        <Insets left="14.0" />
                      </padding>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -492,14 +492,14 @@
                         <String fx:value="refresh_button" />
                      </styleClass>
                   </JFXButton>
-                  <Label layoutX="310.0" mnemonicParsing="true" prefHeight="67.0" prefWidth="286.0" text="Les Catégories" textFill="#d5e0ff">
+                  <Label layoutX="310.0" mnemonicParsing="true" prefHeight="38.0" prefWidth="286.0" text="Les Catégories" textFill="#d5e0ff">
                      <font>
                         <Font name="Roboto Bold" size="42.0" />
                      </font>
                   </Label>
-                  <MFXScrollPane fx:id="scroll_pane_categories" layoutX="71.0" layoutY="90.0" pannable="true" prefHeight="438.0" prefWidth="764.0" stylesheets="@admin.css" thumbColor="#5c59fd" thumbHoverColor="#7a0ed9" trackColor="#d5e0ff">
+                  <MFXScrollPane fx:id="scroll_pane_categories" layoutX="63.0" layoutY="85.0" pannable="true" prefHeight="423.0" prefWidth="785.0" stylesheets="@admin.css" thumbColor="#4441e1" thumbHoverColor="#7a0ed9" trackColor="#d5e0ff">
                      <content>
-                        <FlowPane fx:id="DBCategories_container" hgap="10.0" prefHeight="292.0" prefWidth="761.0" rowValignment="TOP" vgap="10.0">
+                        <FlowPane fx:id="DBCategories_container" hgap="10.0" prefHeight="285.0" prefWidth="762.0" rowValignment="TOP" vgap="10.0">
                            <padding>
                               <Insets left="10.0" right="10.0" top="10.0" />
                            </padding>
@@ -583,7 +583,7 @@
                         </FlowPane>
                      </content>
                   </MFXScrollPane>
-                  <JFXButton alignment="CENTER" buttonType="RAISED" graphicTextGap="10.0" layoutX="487.0" layoutY="540.0" onAction="#addCategory" prefHeight="59.0" prefWidth="348.0" ripplerFill="WHITE" text="AJOUTER" textFill="WHITE">
+                  <JFXButton alignment="CENTER" buttonType="RAISED" graphicTextGap="10.0" layoutX="486.0" layoutY="545.0" onAction="#addCategory" prefHeight="59.0" prefWidth="348.0" ripplerFill="WHITE" text="AJOUTER" textFill="WHITE">
                      <graphic>
                         <FontAwesomeIcon fill="WHITE" glyphName="PLUS" size="30" strokeLineCap="ROUND" strokeLineJoin="ROUND" tabSize="2" text="" wrappingWidth="24.442737531662715">
                            <font>

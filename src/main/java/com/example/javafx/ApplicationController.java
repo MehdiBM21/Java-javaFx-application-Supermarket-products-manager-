@@ -203,6 +203,7 @@ public class ApplicationController implements Initializable{
      setup_table_produit();
      setup_table_users();
         setup_table_ALLProducts();
+        refreshCategory();
     ObservableList<String> type_comboBox=FXCollections.observableArrayList("admin","caissier");
     type_field.setItems(type_comboBox);
 
@@ -898,7 +899,7 @@ public void setup_table_ALLProducts(){
                 Categorie categorie = new Categorie(nom);
                 categorieDao.add(categorie);
                 dashboard_pane.toFront();
-                initializeCategories();
+                refreshCategory();
         }
     }
     public void refreshCategory(){

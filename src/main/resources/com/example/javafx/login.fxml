@@ -20,8 +20,22 @@
    <children>
       <AnchorPane fx:id="topBar" prefHeight="42.0" prefWidth="451.0" styleClass="top-bar">
          <children>
-            <HBox fx:id="hbox" alignment="CENTER_RIGHT" blendMode="SCREEN" cache="true" cacheHint="SCALE" prefHeight="45.0" prefWidth="451.0" spacing="5.0" stylesheets="@login.css">
+            <HBox fx:id="hbox" alignment="CENTER_RIGHT" blendMode="SCREEN" cache="true" cacheHint="SCALE" prefHeight="45.0" prefWidth="451.0" spacing="1.0" stylesheets="@login.css">
                <children>
+                  <Button cancelButton="true" focusTraversable="false" maxWidth="54.0" minWidth="26.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="26.0" style="-fx-background-color: transparent;" textFill="WHITE">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <graphic>
+                        <Circle fill="#29c83f" radius="7.0" stroke="#29c83f" strokeType="INSIDE" />
+                     </graphic>
+                  </Button>
                   <Button cancelButton="true" focusTraversable="false" maxWidth="54.0" minWidth="26.0" mnemonicParsing="false" onAction="#minimize_window" prefHeight="31.0" prefWidth="26.0" styleClass="top-bar-buttons" textFill="WHITE">
                      <HBox.margin>
                         <Insets />
@@ -36,7 +50,7 @@
                         <Insets />
                      </opaqueInsets>
                      <graphic>
-                        <Circle fill="#ffcc00" radius="7.0" stroke="#ffcc00" strokeType="INSIDE" />
+                        <Circle fill="#f7a71e" radius="7.0" stroke="#f7a71e" strokeType="INSIDE" />
                      </graphic>
 
                   </Button>
@@ -51,7 +65,7 @@
                         <Insets />
                      </opaqueInsets>
                      <graphic>
-                        <Circle fill="#ff1b00" radius="7.0" stroke="#ff1b00" strokeType="INSIDE" />
+                        <Circle fill="#f45b4d" radius="7.0" stroke="#f45b4d" strokeType="INSIDE" />
                      </graphic>
                      <HBox.margin>
                         <Insets />
@@ -72,7 +86,7 @@
             <Font name="Calibri Bold" size="14.0" />
          </font>
       </Label>
-      <FontAwesomeIcon fill="SILVER" glyphName="USER" layoutX="83.0" layoutY="286.0" selectionFill="#afafcd" size="27" text="" />
+      <FontAwesomeIcon fill="SILVER" glyphName="USER" layoutX="85.0" layoutY="196.0" selectionFill="#afafcd" size="27" text="" y="4.0" />
       <MFXTextField fx:id="usernameField" borderGap="5.0" floatMode="BORDER" floatingText="Username" floatingTextGap="0.0" layoutX="77.0" layoutY="154.0" nodeOrientation="LEFT_TO_RIGHT" onAction="#nextPassword" prefHeight="62.0" prefWidth="282.0" styleClass="mfx-text-field">
          <font>
             <Font name="Roboto Bold" size="16.0" />
@@ -84,8 +98,8 @@
             <Insets left="50.0" top="12.0" />
          </padding>
       </MFXTextField>
-      <FontAwesomeIcon fill="SILVER" fontSmoothingType="LCD" glyphName="KEY" layoutX="80.0" layoutY="194.0" selectionFill="#afafcd" size="27" text="" wrappingWidth="26.399999999999864" x="4.0" />
-      <MFXPasswordField fx:id="passwordField" allowCut="true" allowPaste="true" borderGap="5.0" floatMode="BORDER" floatingText="Password" floatingTextGap="0.0" graphicTextGap="0.0" hideCharacter="*" layoutX="76.0" layoutY="240.0" onAction="#nextLogin" prefHeight="62.0" prefWidth="282.0" styleClass="mfx-text-field">
+      <FontAwesomeIcon fill="SILVER" fontSmoothingType="LCD" glyphName="KEY" layoutX="79.0" layoutY="278.0" selectionFill="#afafcd" size="27" text="" wrappingWidth="26.399999999999864" x="4.0" y="4.0" />
+      <MFXPasswordField fx:id="passwordField" allowCut="true" allowPaste="true" borderGap="5.0" floatMode="BORDER" floatingText="Password" floatingTextGap="0.0" graphicTextGap="0.0" hideCharacter="*" layoutX="75.0" layoutY="238.0" onAction="#nextLogin" prefHeight="62.0" prefWidth="282.0" styleClass="mfx-text-field">
          <padding>
             <Insets left="50.0" top="12.0" />
          </padding>

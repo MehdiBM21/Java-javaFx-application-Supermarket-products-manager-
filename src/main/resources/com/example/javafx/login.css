@@ -27,6 +27,7 @@
     -fx-font-weight: bold;
     -fx-font-family:"Roboto";
     -fx-border-width: 0 0 3px 0;
+    -fx-padding: 12 0 -8 50;
     -fx-border-radius: 0;
     -fx-text-fill: white;
     -fx-background-color: transparent;

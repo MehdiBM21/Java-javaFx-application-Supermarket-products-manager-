@@ -102,4 +102,20 @@ public class CategorieDaoImpl extends AbstractDao implements ICategorieDao {
         }
         return listeCategories;
     }
+    public String getNomCategorieFromId(int id){
+        PreparedStatement pst = null;
+        ResultSet rst = null;
+        String sql = "SELECT nom FROM categorie WHERE id = ?";
+        try {
+            pst = connection.prepareStatement(sql);
+            pst.setInt(1, id);
+            rst = pst.executeQuery();
+            if(rst.next()){
+                return rst.getString("nom");
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

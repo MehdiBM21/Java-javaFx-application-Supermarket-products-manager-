@@ -27,10 +27,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.effect.Effect;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
@@ -49,12 +47,12 @@ public class ApplicationController implements Initializable{
     @FXML
     private Stage stage;
     @FXML
-    private Button users, home ,refreshproduits_btn,refreshUsers_btn,refreshCategories_btn ;
+    private Button users, home ,refreshproduits_btn,refreshUsers_btn,refreshCategories_btn ,products;
     @FXML
     private Text refresh_icon,refresh_icon2,refresh_icon3;
 
     @FXML
-    private HBox DBCategories_container;
+    private FlowPane DBCategories_container;
 
     @FXML
     private Scene scene;
@@ -68,7 +66,7 @@ public class ApplicationController implements Initializable{
     private AnchorPane content_pane;
     //produits pane variables
     @FXML
-    MFXTableView<Produit> ProduitsTable;
+    MFXTableView<Produit> ProduitsTable,AllProducts_table;
     @FXML
     MFXTableView<User> usersTable;
 
@@ -80,19 +78,7 @@ public class ApplicationController implements Initializable{
             username_rule, password_rule, type_rule,
             modifierUsername_rule, modifierPassword_rule, modifierType_rule,
             categoryName_rule;
-    //USERS PANE VARIABLES
 
-//    @FXML
-//    TableColumn<User, Integer> idColumn;
-//    @FXML
-//    TableColumn<User, String> usernameColumn;
-//    @FXML
-//    TableColumn<User, String> passwordColumn;
-//    @FXML
-//    TableColumn<User, String> typeColumn;
-//    @FXML
-//    TableColumn<User, Void> actionsColumn;
-    //DAO
     private UserDaoImpl userDao = new UserDaoImpl();
     private ProduitDaoImpl produitsDao = new ProduitDaoImpl();
     private CategorieDaoImpl categorieDao = new CategorieDaoImpl();
@@ -103,9 +89,9 @@ public class ApplicationController implements Initializable{
     @FXML
     Pane users_pane, dashboard_pane, products_pane, addProduct_pane, modifierProduct_pane,
             addUser_pane, modifierUser_pane,
-            addCategory_pane;
+            addCategory_pane,allProducts_Pane;
     @FXML
-    TextField designation_field, prix_field, produitSearch_field,
+    TextField designation_field, prix_field,
               modifierDesignation_field, modifierQuantite_field, modifierPrix_field,
                 username_field, password_field,
                 modifierUsername_field, modifierPassword_field, modifierType_field,
@@ -139,6 +125,10 @@ public class ApplicationController implements Initializable{
         if(sidebarBtn == home){
             dashboard_pane.toFront();
         }
+        if (sidebarBtn == products){
+            initialize_AllProducts();
+            allProducts_Pane.toFront();
+        }
         if(sidebarBtn == users){
             initializeUsers();
             users_pane.toFront();
@@ -150,7 +140,7 @@ public class ApplicationController implements Initializable{
         String buttonText = clickedButton.getText();
         categorieNumber = parseCategoryNumber(clickedButton.getId());
         //ProduitDaoImpl dao = new ProduitDaoImpl();
-        //System.out.println(dao.getProduitByCategorie(categorieNumber));
+//        System.out.println(buttonText +"  "+categorieNumber);
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/javafx/produits.fxml"));
         //root = loader.load();
         //ProduitsController produitsController = loader.getController();
@@ -212,11 +202,12 @@ public class ApplicationController implements Initializable{
         });
      setup_table_produit();
      setup_table_users();
+        setup_table_ALLProducts();
     ObservableList<String> type_comboBox=FXCollections.observableArrayList("admin","caissier");
     type_field.setItems(type_comboBox);
 
     }
-    //PRODUIT METHODS
+    //PRODUIT METHODS POURCHAQUE CATEGORIE
     public void setup_table_produit(){
         MFXTableColumn<Produit> idColumnProduit = new MFXTableColumn<>("Id", true, Comparator.comparing(Produit::getId));
         MFXTableColumn<Produit> designationColumn = new MFXTableColumn<>("Designation", true, Comparator.comparing(Produit::getDesignation));
@@ -321,7 +312,57 @@ public class ApplicationController implements Initializable{
 //                            // Logique pour la modification ici
 //                            System.out.println("Modifier produit avec l'ID : " + produit.getId());
 //                        });
-//
+@FXML
+public void setup_table_ALLProducts(){
+    MFXTableColumn<Produit> idColumnProduit = new MFXTableColumn<>("Id Produit", true, Comparator.comparing(Produit::getId));
+    MFXTableColumn<Produit> idCategorie_ColumnProduit = new MFXTableColumn<>("Categorie",true);
+    MFXTableColumn<Produit> designationColumn = new MFXTableColumn<>("Designation", true, Comparator.comparing(Produit::getDesignation));
+    MFXTableColumn<Produit> quantiteColumn = new MFXTableColumn<>("Quantite", true, Comparator.comparing(Produit::getQte));
+    MFXTableColumn<Produit> prixColumn = new MFXTableColumn<>("Prix", true, Comparator.comparing(Produit::getPrix));
+    MFXTableColumn<Produit> dateColumn = new MFXTableColumn<>("Date", true, Comparator.comparing(Produit::getDate));
+    MFXTableColumn<Produit> peremptionColumn = new MFXTableColumn<>("Peremption", true, Comparator.comparing(Produit::getPeremption));
+
+    idColumnProduit.setRowCellFactory(Produit -> new MFXTableRowCell<>(Backend.Produit.Produit::getId));
+    idCategorie_ColumnProduit.setRowCellFactory(produit -> new MFXTableRowCell<>(data -> data.getId(), data -> {
+        return  categorieDao.getNomCategorieFromId(produit.getIdCategorie());
+    }));
+    designationColumn.setRowCellFactory(Produit -> new MFXTableRowCell<>(Backend.Produit.Produit::getDesignation));
+    quantiteColumn.setRowCellFactory(Produit -> new MFXTableRowCell<>(Backend.Produit.Produit::getQte));
+    prixColumn.setRowCellFactory(Produit -> new MFXTableRowCell<>(Backend.Produit.Produit::getPrix));
+    dateColumn.setRowCellFactory(Produit -> new MFXTableRowCell<>(Backend.Produit.Produit::getDate));
+    peremptionColumn.setRowCellFactory(Produit -> new MFXTableRowCell<>(Backend.Produit.Produit::getPeremption));
+
+    idColumnProduit.setAlignment(Pos.CENTER);
+    idColumnProduit.setMinWidth(100);
+    idCategorie_ColumnProduit.setAlignment(Pos.CENTER);
+    idCategorie_ColumnProduit.setMinWidth(180);
+    designationColumn.setAlignment(Pos.CENTER);
+    designationColumn.setMinWidth(150);
+    quantiteColumn.setAlignment(Pos.CENTER);
+    quantiteColumn.setMinWidth(100);
+    prixColumn.setAlignment(Pos.CENTER);
+    prixColumn.setMinWidth(100);
+    dateColumn.setAlignment(Pos.CENTER);
+    dateColumn.setMinWidth(125);
+
+    peremptionColumn.setAlignment(Pos.CENTER);
+    peremptionColumn.setMinWidth(125);
+    peremptionColumn.setAlignment(Pos.CENTER);
+    prixColumn.setMinWidth(100);
+    AllProducts_table.getTableColumns().addAll(idColumnProduit,idCategorie_ColumnProduit, designationColumn,quantiteColumn,prixColumn,dateColumn,peremptionColumn);
+    AllProducts_table.getFilters().addAll(
+            new IntegerFilter<>("Quantite", Produit::getId),
+            new StringFilter<>("Designation", Produit::getDesignation),
+            new IntegerFilter<>("Quantite", Produit::getQte),
+            new DoubleFilter<>("Prix", Produit::getPrix)
+    );
+}
+    @FXML
+    public void initialize_AllProducts() {
+        ObservableList<Produit> produitsList = FXCollections.observableArrayList(produitsDao.getAll());
+        AllProducts_table.setItems(produitsList);
+    }
+
 //                        supprimerButton.setOnAction(event -> {
 //                            Produit produit = getTableView().getItems().get(getIndex());
 //                            supprimerProduit(produit);
@@ -515,6 +556,16 @@ public class ApplicationController implements Initializable{
 
     }
     public void addProduct(){
+        designation_field.setText("");
+        quantite_field.setText("");
+        prix_field.setText("");
+        date_field.setText("");
+        peremption_field.setText("");
+        quantite_rule.setText("");
+        designation_rule.setText("");
+        date_rule.setText("");
+        peremption_rule.setText("");
+        prix_rule.setText("");
         addProduct_pane.toFront();
     }
     public void addUser(){
@@ -809,7 +860,8 @@ public class ApplicationController implements Initializable{
     public void initializeCategories(){
         List<Categorie> categories = categorieDao.getAll();
         for (Categorie category : categories) {
-            if(category.getId() > 4){
+            if(category.getId() > 5){
+                System.out.println(category.getId());
             Button categoryButton = new Button(category.getNom());
             categoryButton.setId("categorie"+category.getId());
             categoryButton.setPrefHeight(127);
@@ -825,7 +877,8 @@ public class ApplicationController implements Initializable{
                 // Ajoutez ici la logique pour afficher les produits de la catégorie sélectionnée, par exemple
             });
             // Ajoutez le bouton à votre interface utilisateur, par exemple, à une VBox nommée "categoriesBox"
-           DBCategories_container.getChildren().add(categoryButton);
+//           DBCategories_container.getChildren().add(categoryButton);
+           DBCategories_container.getChildren().addLast(categoryButton);
         }
         }
     }
@@ -849,7 +902,8 @@ public class ApplicationController implements Initializable{
         }
     }
     public void refreshCategory(){
-        DBCategories_container.getChildren().clear();
+        int size=DBCategories_container.getChildren().size();
+        DBCategories_container.getChildren().remove(5,size);
         initializeCategories();
     }
 

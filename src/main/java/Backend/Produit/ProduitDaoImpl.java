@@ -3,6 +3,8 @@ package Backend.Produit;
 import Backend.Dao.AbstractDao;
 import Backend.Dao.IProduitDao;
 import Backend.Dao.SingleConnection;
+import Backend.Historique.Historique;
+import Backend.Historique.HistoriqueDaoImpl;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -42,6 +44,12 @@ public class ProduitDaoImpl extends AbstractDao implements IProduitDao {
             }
 
             System.out.println("Backend.Produit ajouté avec ID: " + obj.getId());
+            Historique h = new Historique(obj.getIdCategorie(), obj.getDesignation(), obj.getQte(),
+                    obj.getPrix(), 1, LocalDate.now());
+            HistoriqueDaoImpl hdao = new HistoriqueDaoImpl();
+            hdao.add(h);
+
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -70,6 +78,7 @@ public class ProduitDaoImpl extends AbstractDao implements IProduitDao {
             pst = connection.prepareStatement(sql);
             pst.setInt(1, id);
             int rowsDeleted = pst.executeUpdate();
+
             if (rowsDeleted > 0) {
                 System.out.println("Product deleted successfully!");
             } else {
@@ -217,16 +226,10 @@ public class ProduitDaoImpl extends AbstractDao implements IProduitDao {
                 System.out.println("Product with ID " + obj.getId() + " not found.");
             }
             if(action != 0){
-                PreparedStatement pstAction = null;
-                String sqlAction = "INSERT INTO historique (idCategorie, designation, quantite, prix, type, date) VALUES (?,?,?,?,?,?)";
-                pstAction = connection.prepareStatement(sqlAction);
-                pstAction.setInt(1, obj.getIdCategorie());
-                pstAction.setString(2, obj.getDesignation());
-                pstAction.setInt(3, qte);
-                pstAction.setDouble(4, obj.getPrix());
-                pstAction.setInt(5, action);
-                pstAction.setDate(6, Date.valueOf(LocalDate.now()));
-                pstAction.executeUpdate();
+                Historique h = new Historique(obj.getIdCategorie(), obj.getDesignation(), qte,
+                                             obj.getPrix(), action, LocalDate.now());
+                HistoriqueDaoImpl hdao = new HistoriqueDaoImpl();
+                hdao.add(h);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

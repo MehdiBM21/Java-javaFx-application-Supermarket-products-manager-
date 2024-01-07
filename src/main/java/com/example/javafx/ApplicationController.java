@@ -2,6 +2,8 @@ package com.example.javafx;
 
 import Backend.Categorie.Categorie;
 import Backend.Categorie.CategorieDaoImpl;
+import Backend.Historique.Historique;
+import Backend.Historique.HistoriqueDaoImpl;
 import Backend.Produit.Produit;
 import Backend.Produit.ProduitDaoImpl;
 import Backend.User.User;
@@ -851,6 +853,10 @@ public void setup_table_ALLProducts(){
 
     public void supprimerProduit(Produit produit) {
         produitsDao.delete(produit.getId());
+        Historique h = new Historique(produit.getIdCategorie(), produit.getDesignation(), produit.getQte(),
+                produit.getPrix(), -1, LocalDate.now());
+        HistoriqueDaoImpl hdao = new HistoriqueDaoImpl();
+        hdao.add(h);
         initializeProduits();
     }
     public void supprimerUser(User user) {

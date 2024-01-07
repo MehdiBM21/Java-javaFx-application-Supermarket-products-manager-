@@ -2,6 +2,7 @@ package Backend.Categorie;
 
 import Backend.Dao.AbstractDao;
 import Backend.Dao.ICategorieDao;
+import Backend.Dao.SingleConnection;
 
 import java.sql.*;
 import java.util.ArrayList;

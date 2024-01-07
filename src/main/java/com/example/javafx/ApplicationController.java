@@ -84,7 +84,7 @@ public class ApplicationController implements Initializable{
     private CategorieDaoImpl categorieDao = new CategorieDaoImpl();
 
     private double x,y;//for dragging
-    private int categorieNumber, productId_modifier, userId_modifier;
+    private int categorieNumber, productId_modifier, userId_modifier, qteAction;
     //panes
     @FXML
     Pane users_pane, dashboard_pane, products_pane, addProduct_pane, modifierProduct_pane,
@@ -100,7 +100,6 @@ public class ApplicationController implements Initializable{
     MFXDatePicker peremption_field,date_field, modifierDate_field, modifierPeremption_field;
     @FXML
     private MFXComboBox<String> type_field;
-
 
     public void close(ActionEvent event) {
 
@@ -473,7 +472,7 @@ public void setup_table_ALLProducts(){
                 new StringFilter<>("Type",User::getType)
 
         );
-    };
+    }
     public void initializeUsers() {
 
 
@@ -797,6 +796,7 @@ public void setup_table_ALLProducts(){
     public void modifier(Produit p){
         modifierDesignation_field.setText(p.getDesignation());
         modifierQuantite_field.setText(String.valueOf(p.getQte()));
+        qteAction = p.getQte();
         modifierPrix_field.setText(String.valueOf(p.getPrix()));
         modifierDate_field.setValue(p.getDate());
         modifierPeremption_field.setValue(p.getPeremption());
@@ -834,12 +834,21 @@ public void setup_table_ALLProducts(){
             LocalDate peremption = modifierPeremption_field.getValue(); // Adjust the field name as needed
             // TODO :: add the conditions for peremption = null
             Produit p = new Produit(productId_modifier, categoryId, designation, qte, prix, date, peremption);
-            produitsDao.update(p);
+            int result = qte - qteAction;
+            System.out.println(result);
+            if(result < 0) {//on a retiré du produit
+                produitsDao.update(p, -1, -(result));
+            } else if (result > 0) {//on a ajouté du produit
+                produitsDao.update(p, 1,result);
+            }else{//on a rien fait (la table historique ne sera pas remplie
+                produitsDao.update(p, 0, result);
+            }
+
+        }
             products_pane.toFront();
             initializeProduits();
-        }
-
     }
+
     public void supprimerProduit(Produit produit) {
         produitsDao.delete(produit.getId());
         initializeProduits();

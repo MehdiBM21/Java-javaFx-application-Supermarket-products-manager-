@@ -1,12 +1,11 @@
 package Backend.User;
 
-import java.sql.PreparedStatement;
+import java.sql.*;
+
 import Backend.Dao.AbstractDao;
 import Backend.Dao.IUserDao;
+import Backend.Dao.SingleConnection;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 

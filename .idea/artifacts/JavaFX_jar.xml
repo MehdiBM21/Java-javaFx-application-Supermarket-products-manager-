@@ -3,7 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/JavaFX_jar</output-path>
     <root id="archive" name="JavaFX.jar">
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" />
       </element>
       <element id="module-output" name="JavaFX" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/21-ea+24/javafx-graphics-21-ea+24.jar" path-in-jar="/" />
@@ -24,56 +24,24 @@
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/21-ea+24/javafx-base-21-ea+24.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/21-ea+24/javafx-controls-21-ea+24-win.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/github/palexdev/virtualizedfx/11.2.6/virtualizedfx-11.2.6.jar" path-in-jar="/" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-console-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-debug-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-console-l1-2-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-file-l1-2-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-file-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-errorhandling-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-file-l2-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-datetime-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-handle-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-heap-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-interlocked-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-libraryloader-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-memory-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-localization-l1-2-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-processenvironment-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-namedpipe-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-processthreads-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-processthreads-l1-1-1.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-profile-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-rtlsupport-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-string-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-synch-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-synch-l1-2-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-sysinfo-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-timezone-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-core-util-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-crt-conio-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-crt-convert-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-crt-environment-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-crt-filesystem-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-crt-heap-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-crt-locale-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-crt-math-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-crt-multibyte-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-crt-private-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-crt-process-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-crt-runtime-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-crt-stdio-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-crt-string-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-crt-utility-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/api-ms-win-crt-time-l1-1-0.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/glass.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/javafx_font.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/msvcp140.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/msvcp140_1.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/msvcp140_2.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/prism_d3d.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/ucrtbase.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/vcruntime140.dll" />
-      <element id="file-copy" path="$USER_HOME$/.openjfx/cache/21-ea+null/amd64/vcruntime140_1.dll" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:21-ea+24" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:win:21-ea+24" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:21-ea+24" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:win:21-ea+24" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:21-ea+24" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:win:21-ea+24" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:21-ea+24" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:win:21-ea+24" />
+      <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.10.1" />
+      <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.18.30" />
+      <element id="library" level="project" name="Maven: org.aerofx:aerofx:0.2" />
+      <element id="library" level="project" name="Maven: io.github.palexdev:materialfx:11.13.5" />
+      <element id="library" level="project" name="Maven: io.github.palexdev:virtualizedfx:11.2.6" />
+      <element id="library" level="project" name="Maven: com.mysql:mysql-connector-j:8.2.0" />
+      <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.21.9" />
+      <element id="library" level="project" name="Maven: com.jfoenix:jfoenix:9.0.0" />
+      <element id="library" level="project" name="Maven: io.github.typhon0:AnimateFX:1.2.4" />
+      <element id="library" level="project" name="Maven: de.jensd:fontawesomefx:8.2" />
     </root>
   </artifact>
 </component>

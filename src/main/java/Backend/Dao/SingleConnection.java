@@ -25,8 +25,6 @@ public class SingleConnection {
     public static Connection getConnection(){
         if(connection == null){
             new SingleConnection();
-            //System.out.println("instance cree");
-
         }
         return connection;
     }

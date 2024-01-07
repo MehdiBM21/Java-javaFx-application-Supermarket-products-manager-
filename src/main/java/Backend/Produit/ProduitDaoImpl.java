@@ -2,8 +2,10 @@ package Backend.Produit;
 
 import Backend.Dao.AbstractDao;
 import Backend.Dao.IProduitDao;
+import Backend.Dao.SingleConnection;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +22,11 @@ public class ProduitDaoImpl extends AbstractDao implements IProduitDao {
             pst.setInt(3, obj.getQte());
             pst.setDouble(4, obj.getPrix());
             pst.setDate(5, Date.valueOf(obj.getDate()));
-            pst.setDate(6, Date.valueOf(obj.getPeremption())); // Assuming obj.getPeremption() returns a LocalDate
+            if (obj.getPeremption() != null) {
+                pst.setDate(6, Date.valueOf(obj.getPeremption()));
+            } else {
+                pst.setNull(6, Types.DATE);
+            }
             int affectedRows = pst.executeUpdate();
 
             if (affectedRows > 0) {
@@ -74,9 +80,9 @@ public class ProduitDaoImpl extends AbstractDao implements IProduitDao {
         }
     }
 
+
     @Override
     public Produit getById(int id) {
-        // TODO: Implement this method
         return null;
     }
 
@@ -187,7 +193,8 @@ public class ProduitDaoImpl extends AbstractDao implements IProduitDao {
         return listeProduits;
     }
     @Override
-    public void update(Produit obj) {
+    public void update(Produit obj, int action, int qte) {
+        //action: 0 rien/1 ajout/ 2 retrait
         PreparedStatement pst = null;
         String sql = "UPDATE produit SET designation=?, quantite=?, prix=?, date=?, peremption=? WHERE id=?";
         try {
@@ -197,13 +204,29 @@ public class ProduitDaoImpl extends AbstractDao implements IProduitDao {
             pst.setInt(2, obj.getQte());
             pst.setDouble(3, obj.getPrix());
             pst.setDate(4, Date.valueOf(obj.getDate()));
-            pst.setDate(5, Date.valueOf(obj.getPeremption()));
+            if (obj.getPeremption() != null) {
+                pst.setDate(5, Date.valueOf(obj.getPeremption()));
+            } else {
+                pst.setNull(5, Types.DATE);
+            }
             pst.setInt(6, obj.getId());
             int rowsUpdated = pst.executeUpdate();
             if (rowsUpdated > 0) {
                 System.out.println("Product updated successfully!");
             } else {
                 System.out.println("Product with ID " + obj.getId() + " not found.");
+            }
+            if(action != 0){
+                PreparedStatement pstAction = null;
+                String sqlAction = "INSERT INTO historique (idCategorie, designation, quantite, prix, type, date) VALUES (?,?,?,?,?,?)";
+                pstAction = connection.prepareStatement(sqlAction);
+                pstAction.setInt(1, obj.getIdCategorie());
+                pstAction.setString(2, obj.getDesignation());
+                pstAction.setInt(3, qte);
+                pstAction.setDouble(4, obj.getPrix());
+                pstAction.setInt(5, action);
+                pstAction.setDate(6, Date.valueOf(LocalDate.now()));
+                pstAction.executeUpdate();
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

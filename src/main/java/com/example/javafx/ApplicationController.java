@@ -139,7 +139,8 @@ public class ApplicationController implements Initializable{
         //take the id of each sidebar button and show the corresponding pane
         Button sidebarBtn = (Button) event.getSource();
         if(sidebarBtn == dashboard){
-
+            historique_table.getTableColumns().clear();
+            setup_table_historique();
             initializeHistorique();
             dashboard_pane.toFront();
         }

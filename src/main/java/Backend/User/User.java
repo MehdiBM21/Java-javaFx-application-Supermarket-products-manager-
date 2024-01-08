@@ -1,14 +1,14 @@
 package Backend.User;
 
+import lombok.Data;
+
+@Data
 public class User {
     private int id;
-    private String username; // Changed from 'email' to 'username'
+    private String username;
     private String password;
     private String type;
 
-    public User() {
-
-    }
 
     public User(int id, String username, String password, String type) {
         this.id = id;

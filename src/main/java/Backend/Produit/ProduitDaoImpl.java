@@ -92,8 +92,41 @@ public class ProduitDaoImpl extends AbstractDao implements IProduitDao {
 
     @Override
     public Produit getById(int id) {
-        return null;
+        PreparedStatement pst = null;
+        String sql = "SELECT * FROM produit WHERE id = ?";
+        try {
+            pst = connection.prepareStatement(sql);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                Date dateSql = rs.getDate("date");
+                Date peremptionSql = rs.getDate("peremption");
+
+                return new Produit(
+                        rs.getInt("id"),
+                        rs.getInt("idCategorie"),
+                        rs.getString("designation"),
+                        rs.getInt("quantite"),
+                        rs.getDouble("prix"),
+                        dateSql != null ? dateSql.toLocalDate() : null,
+                        peremptionSql != null ? peremptionSql.toLocalDate() : null);
+            } else {
+                return null; // Aucun produit trouvé avec l'ID spécifié
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            // Fermer le PreparedStatement dans le bloc finally
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
+
 
     @Override
     public List<Produit> getAll() {
@@ -119,32 +152,7 @@ public class ProduitDaoImpl extends AbstractDao implements IProduitDao {
         }
         return listeProduits;
     }
-    /*public ObservableList<Backend.Produit> getAll() {
-        ObservableList<Backend.Produit> listeProduits = FXCollections.observableArrayList();
-        try (PreparedStatement pst = connection.prepareStatement("SELECT * FROM produit");
-             ResultSet rs = pst.executeQuery()) {
-            while (rs.next()) {
-                Date dateSql = rs.getDate("date");
-                Date peremptionSql = rs.getDate("peremption");
 
-                Backend.Produit produit = new Backend.Produit(
-                        rs.getInt("id"),
-                        rs.getInt("idCategorie"),
-                        rs.getString("designation"),
-                        rs.getInt("quantite"),
-                        rs.getDouble("prix"),
-                        dateSql != null ? dateSql.toLocalDate() : null,
-                        peremptionSql != null ? peremptionSql.toLocalDate() : null);
-
-                listeProduits.add(produit);
-            }
-        } catch (SQLException e) {
-            System.err.println("Erreur lors de la récupération de tous les produits");
-            e.printStackTrace();
-        }
-        return listeProduits;
-    }
-*/
     @Override
     public List<Produit> getProduitByCategorie(int idCategorie){
         List<Produit> listeProduits = new ArrayList<Produit>();

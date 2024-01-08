@@ -140,6 +140,7 @@ public class ApplicationController implements Initializable{
         Button sidebarBtn = (Button) event.getSource();
         if(sidebarBtn == dashboard){
             historique_table.getTableColumns().clear();
+            historique_table.getFilters().clear();
             setup_table_historique();
             initializeHistorique();
             dashboard_pane.toFront();
@@ -167,8 +168,10 @@ public class ApplicationController implements Initializable{
         //root = loader.load();
         //ProduitsController produitsController = loader.getController();
         ProduitsTable.getTableColumns().clear();
+        ProduitsTable.getFilters().clear();
         setup_table_produit();
        initializeProduits();
+        ProduitsTable.getFilters().clear();
         ProduitsTable.getTableColumns().clear();
         setup_table_produit();
         initializeProduits();

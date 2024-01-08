@@ -10,12 +10,15 @@ import Backend.User.User;
 import Backend.User.UserDaoImpl;
 import animatefx.animation.RotateIn;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
-
+import io.github.palexdev.materialfx.beans.NumberRange;
 import io.github.palexdev.materialfx.controls.*;
+import io.github.palexdev.materialfx.controls.cell.MFXDateCell;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import io.github.palexdev.materialfx.filter.DoubleFilter;
 import io.github.palexdev.materialfx.filter.IntegerFilter;
 import io.github.palexdev.materialfx.filter.StringFilter;
+import io.github.palexdev.materialfx.utils.DateTimeUtils;
+import io.github.palexdev.materialfx.utils.others.dates.DateStringConverter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,33 +31,41 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.effect.Effect;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.function.Function;
 
 public class ApplicationController implements Initializable{
     private Parent root;
+    static Stage   notification_stage;
     @FXML
     private Stage stage;
+    int bool;
     @FXML
-    private Button users, home ,refreshproduits_btn,refreshUsers_btn,refreshCategories_btn ,products;
+    private Button users, home,dashboard ,refreshproduits_btn,refreshUsers_btn,refreshCategories_btn ,products;
     @FXML
     private Text refresh_icon,refresh_icon2,refresh_icon3;
 
     @FXML
     private FlowPane DBCategories_container;
+    @FXML
+    Text notification_nbr;
+    int count;
+    NotificationsController notificationsController;
 
     @FXML
     private Scene scene;
@@ -64,6 +75,7 @@ public class ApplicationController implements Initializable{
     private AnchorPane sideBar;
     @FXML
     private VBox sideBar_vbox;
+
     @FXML
     private AnchorPane content_pane;
     //produits pane variables
@@ -71,7 +83,8 @@ public class ApplicationController implements Initializable{
     MFXTableView<Produit> ProduitsTable,AllProducts_table;
     @FXML
     MFXTableView<User> usersTable;
-
+    @FXML
+    MFXTableView<Historique> historique_table;
     @FXML
     Label categorieLabel, modifier_label, modifierUser_label;
     @FXML
@@ -84,12 +97,13 @@ public class ApplicationController implements Initializable{
     private UserDaoImpl userDao = new UserDaoImpl();
     private ProduitDaoImpl produitsDao = new ProduitDaoImpl();
     private CategorieDaoImpl categorieDao = new CategorieDaoImpl();
+    private HistoriqueDaoImpl hdao = new HistoriqueDaoImpl();
 
     private double x,y;//for dragging
     private int categorieNumber, productId_modifier, userId_modifier, qteAction;
     //panes
     @FXML
-    Pane users_pane, dashboard_pane, products_pane, addProduct_pane, modifierProduct_pane,
+    Pane users_pane, home_pane,dashboard_pane, products_pane, addProduct_pane, modifierProduct_pane,
             addUser_pane, modifierUser_pane,
             addCategory_pane,allProducts_Pane;
     @FXML
@@ -112,7 +126,8 @@ public class ApplicationController implements Initializable{
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         if(alert.showAndWait().get()== ButtonType.OK){
             dashboard_pane.toFront();
-            stage.close();
+//            stage.close();
+            System.exit(1);
         }
     }
     public void minimize_window(ActionEvent event){
@@ -123,8 +138,13 @@ public class ApplicationController implements Initializable{
         //SIDEBAR BUTTONS
         //take the id of each sidebar button and show the corresponding pane
         Button sidebarBtn = (Button) event.getSource();
-        if(sidebarBtn == home){
+        if(sidebarBtn == dashboard){
+
+            initializeHistorique();
             dashboard_pane.toFront();
+        }
+        if(sidebarBtn == home){
+            home_pane.toFront();
         }
         if (sidebarBtn == products){
             initialize_AllProducts();
@@ -135,7 +155,7 @@ public class ApplicationController implements Initializable{
             users_pane.toFront();
         }
     }
-    //DASHBOARD METHODS
+    //home METHODS
     public void showProductsByCategorie(ActionEvent e) throws IOException {
         Button clickedButton = (Button) e.getSource();
         String buttonText = clickedButton.getText();
@@ -204,12 +224,106 @@ public class ApplicationController implements Initializable{
      setup_table_produit();
      setup_table_users();
         setup_table_ALLProducts();
+        setup_table_historique();
+        initializeHistorique();
         refreshCategory();
     ObservableList<String> type_comboBox=FXCollections.observableArrayList("admin","caissier");
     type_field.setItems(type_comboBox);
 
+/*     /////////////////////  Notification  \\\\\\\\\\\\\\\\\\\\\\\ */
+
+        date_field.setYearsRange(NumberRange.of(LocalDate.now().getYear()-1,LocalDate.now().getYear()));
+        peremption_field.setYearsRange(NumberRange.of(LocalDate.now().getYear(),LocalDate.now().getYear()+10));
+        modifierDate_field.setYearsRange(NumberRange.of(LocalDate.now().getYear()-1,LocalDate.now().getYear()));
+        modifierPeremption_field.setYearsRange(NumberRange.of(LocalDate.now().getYear(),LocalDate.now().getYear()+10));
+
+        int count= (int) produitsDao.getAll().stream().filter(produit ->produit.getPeremption()!=null && produit.getPeremption().isBefore(LocalDate.now())).count();
+
+        notification_nbr.setText(Integer.toString(count));
+
+       change_scene();
+
+
+
     }
-    //PRODUIT METHODS POURCHAQUE CATEGORIE
+/*   ////////////////////////  TABLE HISTRIQUE \\\\\\\\\\\\\\\\\\\\\\\*/
+    public void setup_table_historique(){
+        MFXTableColumn<Historique> idProduitColumn = new MFXTableColumn<>("Id", true, Comparator.comparing(Historique::getId));
+        MFXTableColumn<Historique> idCategorieColumn = new MFXTableColumn<>("Categorie", true, Comparator.comparing(Historique::getIdCategorie));
+        MFXTableColumn<Historique> designationColumn = new MFXTableColumn<>("Designation", true, Comparator.comparing(Historique::getDesignation));
+        MFXTableColumn<Historique> qteColumn = new MFXTableColumn<>("Quantite", true, Comparator.comparing(Historique::getQte));
+        MFXTableColumn<Historique> prixColumn = new MFXTableColumn<>("Prix", true, Comparator.comparing(Historique::getPrix));
+        MFXTableColumn<Historique> typeColumn = new MFXTableColumn<>("Type", true,Comparator.comparing(Historique::getType));
+        MFXTableColumn<Historique> actionColumn = new MFXTableColumn<>("Action", true);
+        MFXTableColumn<Historique> dateColumn = new MFXTableColumn<>("Date", true, Comparator.comparing(Historique::getDate));
+
+        idProduitColumn.setRowCellFactory(Historique -> new MFXTableRowCell<>(Backend.Historique.Historique::getId));
+        idCategorieColumn.setRowCellFactory(historique -> new MFXTableRowCell<>(data -> data.getType(), data -> {return categorieDao.getNomCategorieFromId(historique.getIdCategorie());}));
+        designationColumn.setRowCellFactory(Historique -> new MFXTableRowCell<>(Backend.Historique.Historique::getDesignation));
+        qteColumn.setRowCellFactory(Historique -> new MFXTableRowCell<>(Backend.Historique.Historique::getQte));
+        prixColumn.setRowCellFactory(Historique -> new MFXTableRowCell<>(Backend.Historique.Historique::getPrix));
+        typeColumn.setRowCellFactory(Historique -> new MFXTableRowCell<>(Backend.Historique.Historique::getType));
+
+
+        actionColumn.setRowCellFactory(historique -> new MFXTableRowCell<>(data -> data.getType(), data -> {return null;}) {
+            {
+                setAlignment(Pos.CENTER);
+                setMinWidth(60);
+                FontAwesomeIcon icon= new FontAwesomeIcon();
+
+                icon.setSize("23");
+                if(historique.getType()==1){
+                    icon.setGlyphName("ARROW_LEFT");
+                    icon.setFill(Color.GREEN);
+                }
+                if(historique.getType()==-1) {
+                    icon.setGlyphName("ARROW_RIGHT");
+                    icon.setFill(Color.RED);
+                }
+                setGraphic(icon);
+            }
+        });
+        dateColumn.setRowCellFactory(Historique -> new MFXTableRowCell<>(Backend.Historique.Historique::getDate));
+
+        idProduitColumn.setAlignment(Pos.CENTER);
+        idProduitColumn.setMinWidth(50);
+        idCategorieColumn.setAlignment(Pos.CENTER);
+        idCategorieColumn.setMinWidth(180);
+        designationColumn.setAlignment(Pos.CENTER);
+        designationColumn.setMinWidth(150);
+        qteColumn.setAlignment(Pos.CENTER);
+        qteColumn.setMinWidth(80);
+        prixColumn.setAlignment(Pos.CENTER);
+        prixColumn.setMinWidth(150);
+        typeColumn.setAlignment(Pos.CENTER);
+        typeColumn.setMinWidth(60);
+        dateColumn.setAlignment(Pos.CENTER);
+        dateColumn.setMinWidth(110);
+
+        historique_table.getTableColumns().addAll(idProduitColumn,idCategorieColumn, designationColumn,qteColumn,prixColumn,typeColumn,actionColumn,dateColumn);
+        historique_table.getFilters().addAll(
+
+                new IntegerFilter<>("Id", Historique::getId),
+                new StringFilter<>("Id categorie",historique -> {return categorieDao.getNomCategorieFromId(historique.getIdCategorie());} ),
+                new StringFilter<>("Designation", Historique::getDesignation),
+
+                new IntegerFilter<>("Quantite", Historique::getQte),
+                new DoubleFilter<>("Prix", Historique::getPrix),
+                new IntegerFilter<>("Type", Historique::getType)
+
+        );
+
+    }
+    @FXML
+    public void initializeHistorique() {
+        ObservableList<Historique> produitsList = FXCollections.observableArrayList(hdao.getAll());
+        historique_table.setItems(produitsList);
+    }
+
+
+
+
+    /*   ////////////////////////  PRODUIT METHODS POURCHAQUE CATEGORIE \\\\\\\\\\\\\\\\\\\\\\\*/
     public void setup_table_produit(){
         MFXTableColumn<Produit> idColumnProduit = new MFXTableColumn<>("Id", true, Comparator.comparing(Produit::getId));
         MFXTableColumn<Produit> designationColumn = new MFXTableColumn<>("Designation", true, Comparator.comparing(Produit::getDesignation));
@@ -545,10 +659,11 @@ public void setup_table_ALLProducts(){
 
 
     public void SignOut(ActionEvent event) throws IOException {
+        notification_stage.close();
         dashboard_pane.toFront();
-        Parent Dashboard = FXMLLoader.load(getClass().getResource("/com/example/javafx/login.fxml"));
+        Parent home = FXMLLoader.load(getClass().getResource("/com/example/javafx/login.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(Dashboard);
+        Scene scene = new Scene(home);
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
         stage.show();
@@ -781,6 +896,7 @@ public void setup_table_ALLProducts(){
             produitsDao.add(p);
             products_pane.toFront();
             initializeProduits();
+            refresh_notifications(  notificationsController);
             System.out.println("le produit est ajouter");
         }
     }
@@ -849,13 +965,14 @@ public void setup_table_ALLProducts(){
         }
             products_pane.toFront();
             initializeProduits();
+        refresh_notifications(  notificationsController);
     }
 
     public void supprimerProduit(Produit produit) {
         produitsDao.delete(produit.getId());
-        Historique h = new Historique(produit.getIdCategorie(), produit.getDesignation(), produit.getQte(),
+        Historique h = new Historique(produit.getId(),produit.getIdCategorie(), produit.getDesignation(), produit.getQte(),
                 produit.getPrix(), -1, LocalDate.now());
-        HistoriqueDaoImpl hdao = new HistoriqueDaoImpl();
+
         hdao.add(h);
         initializeProduits();
     }
@@ -870,7 +987,7 @@ public void setup_table_ALLProducts(){
         users_pane.toFront();
     }
     public void cancelCategory(){
-        dashboard_pane.toFront();
+        home_pane.toFront();
     }
 
     public void initializeCategories(){
@@ -913,7 +1030,7 @@ public void setup_table_ALLProducts(){
                 String nom = categoryName_field.getText();
                 Categorie categorie = new Categorie(nom);
                 categorieDao.add(categorie);
-                dashboard_pane.toFront();
+                home_pane.toFront();
                 refreshCategory();
         }
     }
@@ -923,5 +1040,42 @@ public void setup_table_ALLProducts(){
         initializeCategories();
     }
 
+//    notification
+public void show_notifications(ActionEvent event) throws IOException {
+
+    refresh_notifications(notificationsController);
+    if (notification_stage.isShowing()) {
+        notification_stage.close();
+    } else {
+        notification_stage.show();
+
+    }
+}
+    public  void refresh_notifications(NotificationsController notificationsController ){
+        count=(int)produitsDao.getAll().stream().filter(produit ->produit.getPeremption()!=null && produit.getPeremption().isBefore(LocalDate.now())).count();
+        notification_nbr.setText(Integer.toString(count));
+
+
+        notificationsController.Initialize_notifications();
+    }
+    public void change_scene(){
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/javafx/notifications.fxml"));
+            root = loader.load();
+            notificationsController = loader.getController();
+            refresh_notifications( notificationsController );
+            scene = new Scene(root);
+            notification_stage=new Stage();
+            notification_stage.initStyle(StageStyle.TRANSPARENT);
+            scene.setFill(Color.TRANSPARENT);
+            notification_stage.setScene(scene);
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
 }

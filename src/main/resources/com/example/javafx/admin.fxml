@@ -8,6 +8,7 @@
 <?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
 <?import io.github.palexdev.materialfx.controls.MFXTableView?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.font.MFXFontIcon?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
@@ -26,12 +27,13 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="main_pan" prefHeight="645.0" prefWidth="1099.0" stylesheets="@admin.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafx.ApplicationController">
    <children>
-      <AnchorPane fx:id="topBar" prefHeight="46.0" prefWidth="1120.0">
+      <AnchorPane fx:id="topBar" prefHeight="46.0" prefWidth="906.0">
          <children>
-            <HBox alignment="CENTER_RIGHT" blendMode="SCREEN" cache="true" cacheHint="SCALE" prefHeight="46.0" prefWidth="1120.0" spacing="1.0" styleClass="top-bar">
+            <HBox alignment="CENTER_RIGHT" blendMode="SCREEN" cache="true" cacheHint="SCALE" layoutX="214.0" prefHeight="46.0" prefWidth="906.0" spacing="1.0" styleClass="top-bar">
                <children>
                   <Button cancelButton="true" focusTraversable="false" maxWidth="54.0" minWidth="26.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="26.0" style="-fx-background-color: transparent;" textFill="WHITE">
                      <font>
@@ -95,6 +97,15 @@
          <children>
             <VBox fx:id="sideBar_vbox" alignment="CENTER" layoutY="55.0" prefHeight="466.0" prefWidth="214.0" spacing="13.0">
                <children>
+                  <MFXButton fx:id="dashboard" alignment="BASELINE_LEFT" buttonType="RAISED" depthLevel="LEVEL5" graphicTextGap="0.0" layoutX="24.0" layoutY="146.0" onAction="#switchTo" prefHeight="56.0" prefWidth="188.0" rippleAnimateShadow="true" rippleAnimationSpeed="0.7" rippleBackgroundOpacity="1.0" text="Dashboard">
+                     <graphic>
+                        <FontAwesomeIcon fill="WHITE" glyphName="DASHBOARD" size="25px">
+                           <font>
+                              <Font name="System Italic" size="41.0" />
+                           </font>
+                        </FontAwesomeIcon>
+                     </graphic>
+                  </MFXButton>
                   <MFXButton fx:id="home" alignment="BASELINE_LEFT" buttonType="RAISED" depthLevel="LEVEL5" graphicTextGap="0.0" onAction="#switchTo" prefHeight="56.0" prefWidth="188.0" rippleAnimateShadow="true" rippleAnimationSpeed="0.7" rippleBackgroundOpacity="1.0" text="Home">
                      <graphic>
                         <FontAwesomeIcon fill="WHITE" glyphName="HOME" size="25px">
@@ -164,6 +175,17 @@
                   </LinearGradient>
                </rippleColor>
             </MFXButton>
+            <Button layoutX="162.0" layoutY="14.0" mnemonicParsing="false" onAction="#show_notifications" style="-fx-background-color: transparent;">
+               <graphic>
+                  <MFXFontIcon description="mfx-bell" size="25.0">
+                     <color>
+                        <Color red="0.9157894849777222" green="0.8988304138183594" blue="0.8988304138183594" />
+                     </color>
+                  </MFXFontIcon>
+               </graphic>
+            </Button>
+            <Circle fill="#810ee3" layoutX="190.0" layoutY="23.0" radius="9.0" stroke="#665757" strokeType="INSIDE" translateX="1.0" translateY="-6.0" />
+            <Text fx:id="notification_nbr" fill="#f4eeee" layoutX="181.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" translateX="1.0" translateY="-6.0" wrappingWidth="18.0" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="content_pane" layoutX="214.0" layoutY="46.0" prefHeight="606.0" prefWidth="895.0">
@@ -216,97 +238,6 @@
                      <styleClass>
                         <String fx:value="annuler_buttons" />
                         <String fx:value="mfx-button" />
-                     </styleClass>
-                  </JFXButton>
-               </children>
-            </Pane>
-            <Pane fx:id="addProduct_pane" prefHeight="618.0" prefWidth="906.0" stylesheets="@produit.css">
-               <children>
-                  <Label alignment="TOP_CENTER" layoutX="314.0" prefHeight="46.0" prefWidth="316.0" styleClass="titles" text="Ajouter un produit" textFill="WHITE">
-                     <font>
-                        <Font name="Arial" size="40.0" />
-                     </font>
-                  </Label>
-                  <VBox alignment="CENTER" layoutX="311.0" layoutY="74.0" prefHeight="454.0" prefWidth="323.0" style="-fx-spacing: 10;">
-                     <children>
-                        <MFXTextField fx:id="designation_field" borderGap="1.0" floatMode="BORDER" floatingText="Designation" floatingTextGap="0.0" prefHeight="53.0" prefWidth="349.0" styleClass="ajoutProduit-text-field">
-                           <padding>
-                              <Insets bottom="-8.0" />
-                           </padding></MFXTextField>
-                        <Label fx:id="designation_rule" prefHeight="18.0" prefWidth="333.0" textFill="RED" />
-                        <MFXTextField fx:id="quantite_field" borderGap="1.0" floatMode="BORDER" floatingText="Quantite" floatingTextGap="0.0" layoutX="10.0" layoutY="38.0" prefHeight="53.0" prefWidth="338.0" styleClass="ajoutProduit-text-field">
-                           <padding>
-                              <Insets bottom="-8.0" />
-                           </padding></MFXTextField>
-                        <Label fx:id="quantite_rule" layoutX="10.0" layoutY="80.0" prefHeight="18.0" prefWidth="338.0" textFill="RED" />
-                        <MFXDatePicker fx:id="date_field" borderGap="1.0" floatMode="BORDER" floatingText="date d'entree de stock" prefHeight="57.0" prefWidth="335.0">
-                           <font>
-                              <Font name="Roboto Bold" size="15.0" />
-                           </font>
-                           <padding>
-                              <Insets bottom="-8.0" />
-                           </padding>
-                        </MFXDatePicker>
-                        <Label fx:id="date_rule" layoutX="10.0" layoutY="246.0" prefHeight="18.0" prefWidth="339.0" textFill="RED" />
-                        <MFXDatePicker fx:id="peremption_field" borderGap="1.0" floatMode="BORDER" floatingText="date d'expiration" layoutX="10.0" layoutY="310.0" prefHeight="58.0" prefWidth="339.0">
-                           <font>
-                              <Font name="Roboto Bold" size="15.0" />
-                           </font>
-                           <padding>
-                              <Insets bottom="-8.0" />
-                           </padding>
-                        </MFXDatePicker>
-                        <Label fx:id="peremption_rule" prefHeight="18.0" prefWidth="334.0" textFill="RED" />
-                        <MFXTextField fx:id="prix_field" borderGap="1.0" floatMode="BORDER" floatingText="Prix" floatingTextGap="0.0" prefHeight="54.0" prefWidth="344.0" styleClass="ajoutProduit-text-field">
-                           <padding>
-                              <Insets bottom="-8.0" />
-                           </padding></MFXTextField>
-                        <Label fx:id="prix_rule" layoutX="10.0" layoutY="342.0" prefHeight="18.0" prefWidth="350.0" textFill="RED" />
-                     </children>
-                  </VBox>
-                  <JFXButton fx:id="valider_btn_produit" buttonType="RAISED" layoutX="311.0" layoutY="540.0" onAction="#ValiderProduit" prefHeight="56.0" prefWidth="138.0" ripplerFill="#001545" text="Valider" textFill="#d3d3d3">
-                     <styleClass>
-                        <String fx:value="mfx-button" />
-                        <String fx:value="valider_buttons" />
-                     </styleClass></JFXButton>
-                  <JFXButton fx:id="annulerProduit_btn" layoutX="496.0" layoutY="540.0" onAction="#cancelProduct" prefHeight="56.0" prefWidth="138.0" ripplerFill="#e1221c" text="Annuler" textFill="#d3d3d3">
-                     <styleClass>
-                        <String fx:value="mfx-button" />
-                        <String fx:value="annuler_buttons" />
-                     </styleClass></JFXButton>
-               </children>
-            </Pane>
-            <Pane fx:id="modifierProduct_pane" prefHeight="618.0" prefWidth="906.0" stylesheets="@produit.css">
-               <children>
-                  <Label fx:id="modifier_label" alignment="CENTER" layoutX="186.0" prefHeight="53.0" prefWidth="578.0" styleClass="titles" text="Modifier le Produit" textFill="WHITE">
-                     <font>
-                        <Font name="Arial" size="40.0" />
-                     </font>
-                  </Label>
-                  <VBox layoutX="314.0" layoutY="69.0" prefHeight="466.0" prefWidth="323.0" style="-fx-spacing: 10;">
-                     <children>
-                        <MFXTextField fx:id="modifierDesignation_field" floatingText="Designation" prefHeight="59.0" prefWidth="355.0" />
-                        <Label fx:id="modifierDesignation_rule" prefHeight="18.0" prefWidth="338.0" textFill="RED" />
-                        <MFXTextField fx:id="modifierQuantite_field" floatingText="Quantité" prefHeight="59.0" prefWidth="349.0" />
-                        <Label fx:id="modifierQuantite_rule" layoutX="10.0" layoutY="80.0" prefHeight="18.0" prefWidth="353.0" textFill="RED" />
-                        <MFXDatePicker fx:id="modifierDate_field" floatMode="BORDER" floatingText="date d'entree de stock" prefHeight="50.0" prefWidth="327.0" />
-                        <Label fx:id="modifierDate_rule" layoutX="10.0" layoutY="246.0" prefHeight="18.0" prefWidth="345.0" textFill="RED" />
-                        <MFXDatePicker fx:id="modifierPeremption_field" floatMode="BORDER" floatingText="date de peremption (si existe)" prefHeight="50.0" prefWidth="334.0" />
-                        <Label fx:id="modifierPeremption_rule" prefHeight="18.0" prefWidth="331.0" textFill="RED" />
-                        <MFXTextField fx:id="modifierPrix_field" floatingText="Prix" prefHeight="59.0" prefWidth="339.0" />
-                        <Label fx:id="modifierPrix_rule" layoutX="10.0" layoutY="342.0" prefHeight="18.0" prefWidth="333.0" textFill="RED" />
-                     </children>
-                  </VBox>
-                  <JFXButton fx:id="modifierValider_btn" layoutX="314.0" layoutY="535.0" onAction="#modifierValiderProduit" prefHeight="56.0" prefWidth="138.0" stylesheets="@admin.css" text="Valider" textFill="#d3d3d3">
-                     <styleClass>
-                        <String fx:value="valider_buttons" />
-                        <String fx:value="mfx-button" />
-                     </styleClass>
-                  </JFXButton>
-                  <JFXButton fx:id="annuler_modifier_Produit_btn" layoutX="499.0" layoutY="535.0" onAction="#cancelProduct" prefHeight="56.0" prefWidth="138.0" text="Annuler" textFill="#d3d3d3">
-                     <styleClass>
-                        <String fx:value="mfx-button" />
-                        <String fx:value="annuler_buttons" />
                      </styleClass>
                   </JFXButton>
                </children>
@@ -468,7 +399,7 @@
                      </styleClass></JFXButton>
                </children>
             </Pane>
-            <Pane fx:id="dashboard_pane" prefHeight="618.0" prefWidth="906.0">
+            <Pane fx:id="home_pane" prefHeight="618.0" prefWidth="918.0">
                <children>
                   <JFXButton fx:id="refreshCategories_btn" alignment="CENTER" buttonType="RAISED" graphicTextGap="10.0" layoutX="73.0" layoutY="545.0" onAction="#refreshCategory" prefHeight="59.0" prefWidth="348.0" ripplerFill="WHITE" text="REFRESH" textFill="WHITE">
                      <graphic>
@@ -605,6 +536,107 @@
                         <String fx:value="mfx-button" />
                      </styleClass>
                   </JFXButton>
+               </children>
+            </Pane>
+            <Pane fx:id="addProduct_pane" prefHeight="618.0" prefWidth="906.0" stylesheets="@produit.css">
+               <children>
+                  <Label alignment="TOP_CENTER" layoutX="314.0" prefHeight="46.0" prefWidth="316.0" styleClass="titles" text="Ajouter un produit" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="40.0" />
+                     </font>
+                  </Label>
+                  <VBox alignment="CENTER" layoutX="311.0" layoutY="74.0" prefHeight="454.0" prefWidth="323.0" style="-fx-spacing: 10;">
+                     <children>
+                        <MFXTextField fx:id="designation_field" borderGap="1.0" floatMode="BORDER" floatingText="Designation" floatingTextGap="0.0" prefHeight="53.0" prefWidth="349.0" styleClass="ajoutProduit-text-field">
+                           <padding>
+                              <Insets bottom="-8.0" />
+                           </padding></MFXTextField>
+                        <Label fx:id="designation_rule" prefHeight="18.0" prefWidth="333.0" textFill="RED" />
+                        <MFXTextField fx:id="quantite_field" borderGap="1.0" floatMode="BORDER" floatingText="Quantite" floatingTextGap="0.0" layoutX="10.0" layoutY="38.0" prefHeight="53.0" prefWidth="338.0" styleClass="ajoutProduit-text-field">
+                           <padding>
+                              <Insets bottom="-8.0" />
+                           </padding></MFXTextField>
+                        <Label fx:id="quantite_rule" layoutX="10.0" layoutY="80.0" prefHeight="18.0" prefWidth="338.0" textFill="RED" />
+                        <MFXDatePicker fx:id="date_field" allowEdit="false" borderGap="1.0" floatMode="BORDER" floatingText="date d'entree de stock" prefHeight="57.0" prefWidth="335.0">
+                           <font>
+                              <Font name="Roboto Bold" size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="-8.0" />
+                           </padding>
+                        </MFXDatePicker>
+                        <Label fx:id="date_rule" layoutX="10.0" layoutY="246.0" prefHeight="18.0" prefWidth="339.0" textFill="RED" />
+                        <MFXDatePicker fx:id="peremption_field" allowEdit="false" borderGap="1.0" floatMode="BORDER" floatingText="date d'expiration" layoutX="10.0" layoutY="310.0" prefHeight="58.0" prefWidth="339.0">
+                           <font>
+                              <Font name="Roboto Bold" size="15.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="-8.0" />
+                           </padding>
+                        </MFXDatePicker>
+                        <Label fx:id="peremption_rule" prefHeight="18.0" prefWidth="334.0" textFill="RED" />
+                        <MFXTextField fx:id="prix_field" borderGap="1.0" floatMode="BORDER" floatingText="Prix" floatingTextGap="0.0" prefHeight="54.0" prefWidth="344.0" styleClass="ajoutProduit-text-field">
+                           <padding>
+                              <Insets bottom="-8.0" />
+                           </padding></MFXTextField>
+                        <Label fx:id="prix_rule" layoutX="10.0" layoutY="342.0" prefHeight="18.0" prefWidth="350.0" textFill="RED" />
+                     </children>
+                  </VBox>
+                  <JFXButton fx:id="valider_btn_produit" buttonType="RAISED" layoutX="311.0" layoutY="540.0" onAction="#ValiderProduit" prefHeight="56.0" prefWidth="138.0" ripplerFill="#001545" text="Valider" textFill="#d3d3d3">
+                     <styleClass>
+                        <String fx:value="mfx-button" />
+                        <String fx:value="valider_buttons" />
+                     </styleClass></JFXButton>
+                  <JFXButton fx:id="annulerProduit_btn" layoutX="496.0" layoutY="540.0" onAction="#cancelProduct" prefHeight="56.0" prefWidth="138.0" ripplerFill="#e1221c" text="Annuler" textFill="#d3d3d3">
+                     <styleClass>
+                        <String fx:value="mfx-button" />
+                        <String fx:value="annuler_buttons" />
+                     </styleClass></JFXButton>
+               </children>
+            </Pane>
+            <Pane fx:id="modifierProduct_pane" prefHeight="618.0" prefWidth="906.0" stylesheets="@produit.css">
+               <children>
+                  <Label fx:id="modifier_label" alignment="CENTER" layoutX="186.0" prefHeight="53.0" prefWidth="578.0" styleClass="titles" text="Modifier le Produit" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="40.0" />
+                     </font>
+                  </Label>
+                  <VBox layoutX="314.0" layoutY="69.0" prefHeight="466.0" prefWidth="323.0" style="-fx-spacing: 10;">
+                     <children>
+                        <MFXTextField fx:id="modifierDesignation_field" floatingText="Designation" prefHeight="59.0" prefWidth="355.0" />
+                        <Label fx:id="modifierDesignation_rule" prefHeight="18.0" prefWidth="338.0" textFill="RED" />
+                        <MFXTextField fx:id="modifierQuantite_field" floatingText="Quantité" prefHeight="59.0" prefWidth="349.0" />
+                        <Label fx:id="modifierQuantite_rule" layoutX="10.0" layoutY="80.0" prefHeight="18.0" prefWidth="353.0" textFill="RED" />
+                        <MFXDatePicker fx:id="modifierDate_field" allowEdit="false" floatMode="BORDER" floatingText="date d'entree de stock" prefHeight="50.0" prefWidth="327.0" />
+                        <Label fx:id="modifierDate_rule" layoutX="10.0" layoutY="246.0" prefHeight="18.0" prefWidth="345.0" textFill="RED" />
+                        <MFXDatePicker fx:id="modifierPeremption_field" allowEdit="false" floatMode="BORDER" floatingText="date de peremption (si existe)" prefHeight="50.0" prefWidth="334.0" />
+                        <Label fx:id="modifierPeremption_rule" prefHeight="18.0" prefWidth="331.0" textFill="RED" />
+                        <MFXTextField fx:id="modifierPrix_field" floatingText="Prix" prefHeight="59.0" prefWidth="339.0" />
+                        <Label fx:id="modifierPrix_rule" layoutX="10.0" layoutY="342.0" prefHeight="18.0" prefWidth="333.0" textFill="RED" />
+                     </children>
+                  </VBox>
+                  <JFXButton fx:id="modifierValider_btn" layoutX="314.0" layoutY="535.0" onAction="#modifierValiderProduit" prefHeight="56.0" prefWidth="138.0" stylesheets="@admin.css" text="Valider" textFill="#d3d3d3">
+                     <styleClass>
+                        <String fx:value="valider_buttons" />
+                        <String fx:value="mfx-button" />
+                     </styleClass>
+                  </JFXButton>
+                  <JFXButton fx:id="annuler_modifier_Produit_btn" layoutX="499.0" layoutY="535.0" onAction="#cancelProduct" prefHeight="56.0" prefWidth="138.0" text="Annuler" textFill="#d3d3d3">
+                     <styleClass>
+                        <String fx:value="mfx-button" />
+                        <String fx:value="annuler_buttons" />
+                     </styleClass>
+                  </JFXButton>
+               </children>
+            </Pane>
+            <Pane fx:id="dashboard_pane" layoutX="-1.0" layoutY="-1.0" prefHeight="618.0" prefWidth="918.0" stylesheets="@user.css">
+               <children>
+                  <Label layoutX="378.0" prefHeight="50.0" prefWidth="162.0" styleClass="titles" text="Les actions" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="40.0" />
+                     </font>
+                  </Label>
+                  <MFXTableView fx:id="historique_table" layoutX="12.0" layoutY="75.0" prefHeight="486.0" prefWidth="895.0" />
                </children>
             </Pane>
          </children>

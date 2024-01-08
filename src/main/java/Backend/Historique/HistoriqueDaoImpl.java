@@ -38,15 +38,16 @@ public class HistoriqueDaoImpl extends AbstractDao implements IHistoriqueDao {
     @Override
     public void add(Historique h){
         PreparedStatement pstAction = null;
-        String sqlAction = "INSERT INTO historique (idCategorie, designation, quantite, prix, type, date) VALUES (?,?,?,?,?,?)";
+        String sqlAction = "INSERT INTO historique  VALUES (?,?,?,?,?,?,?)";
         try {
             pstAction = connection.prepareStatement(sqlAction);
-            pstAction.setInt(1, h.getIdCategorie());
-            pstAction.setString(2, h.getDesignation());
-            pstAction.setInt(3, h.getQte());
-            pstAction.setDouble(4, h.getPrix());
-            pstAction.setInt(5, h.getType());
-            pstAction.setDate(6, Date.valueOf(h.getDate()));
+            pstAction.setInt(1, h.getId());
+            pstAction.setInt(2, h.getIdCategorie());
+            pstAction.setString(3, h.getDesignation());
+            pstAction.setInt(4, h.getQte());
+            pstAction.setDouble(5, h.getPrix());
+            pstAction.setInt(6, h.getType());
+            pstAction.setDate(7, Date.valueOf(h.getDate()));
             pstAction.executeUpdate();
         }catch(SQLException e){
             e.printStackTrace();

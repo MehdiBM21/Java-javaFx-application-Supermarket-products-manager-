@@ -44,7 +44,7 @@ public class ProduitDaoImpl extends AbstractDao implements IProduitDao {
             }
 
             System.out.println("Backend.Produit ajouté avec ID: " + obj.getId());
-            Historique h = new Historique(obj.getIdCategorie(), obj.getDesignation(), obj.getQte(),
+            Historique h = new Historique(obj.getId(),obj.getIdCategorie(), obj.getDesignation(), obj.getQte(),
                     obj.getPrix(), 1, LocalDate.now());
             HistoriqueDaoImpl hdao = new HistoriqueDaoImpl();
             hdao.add(h);
@@ -226,7 +226,7 @@ public class ProduitDaoImpl extends AbstractDao implements IProduitDao {
                 System.out.println("Product with ID " + obj.getId() + " not found.");
             }
             if(action != 0){
-                Historique h = new Historique(obj.getIdCategorie(), obj.getDesignation(), qte,
+                Historique h = new Historique(obj.getId(),obj.getIdCategorie(), obj.getDesignation(), qte,
                                              obj.getPrix(), action, LocalDate.now());
                 HistoriqueDaoImpl hdao = new HistoriqueDaoImpl();
                 hdao.add(h);

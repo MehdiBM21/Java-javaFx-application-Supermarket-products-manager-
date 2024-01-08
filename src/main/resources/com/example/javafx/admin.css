@@ -70,7 +70,7 @@
 
 }
 
-#content_pane, #products_pane, #users_pane, #dashboard_pane, #addProduct_pane, #modifierProduct_pane,
+#content_pane, #products_pane, #users_pane, #dashboard_pane,#home_pane, #addProduct_pane, #modifierProduct_pane,
 #addUser_pane, #modifierUser_pane,#allProducts_Pane,
 #addCategory_pane{
     -fx-background-radius: 0 0 20px 0;

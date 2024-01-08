@@ -165,7 +165,12 @@ public class ApplicationController implements Initializable{
         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/javafx/produits.fxml"));
         //root = loader.load();
         //ProduitsController produitsController = loader.getController();
+        ProduitsTable.getTableColumns().clear();
+        setup_table_produit();
        initializeProduits();
+        ProduitsTable.getTableColumns().clear();
+        setup_table_produit();
+        initializeProduits();
 
         displayCategorie(buttonText);
         products_pane.toFront();
@@ -221,7 +226,7 @@ public class ApplicationController implements Initializable{
             rotateIn.setSpeed(0.7);
             rotateIn.play();
         });
-     setup_table_produit();
+//     setup_table_produit();
      setup_table_users();
         setup_table_ALLProducts();
         setup_table_historique();

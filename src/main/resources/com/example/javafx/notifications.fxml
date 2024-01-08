@@ -7,19 +7,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="458.0" style="-fx-background-radius: 5;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafx.NotificationsController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="458.0" style="-fx-background-radius: 8; -fx-background-color: #554955;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafx.NotificationsController">
     <children>
-        <MFXScrollPane hbarPolicy="NEVER" layoutY="50.0" prefHeight="349.0" prefWidth="458.0" style="-fx-background-radius: 5; -fx-background-color: #f8f5f5;">
+        <MFXScrollPane hbarPolicy="NEVER" layoutY="50.0" prefHeight="352.0" prefWidth="458.0" style="-fx-background-radius: 0 0 8 8; -fx-background-color: #F3F0FB;">
             <content>
-                <VBox fx:id="notification_vbox" prefHeight="348.0" prefWidth="424.0" />
+                <VBox fx:id="notification_vbox" prefHeight="349.0" prefWidth="422.0" />
             </content>
             <padding>
                 <Insets left="5.0" />
             </padding>
         </MFXScrollPane>
-        <AnchorPane fx:id="topBar" prefHeight="51.0" prefWidth="458.0" style="-fx-background-radius: 5; -fx-background-color: #E1E1E9;">
+        <AnchorPane fx:id="topBar" prefHeight="51.0" prefWidth="458.0" style="-fx-background-radius: 8 8 0 0; -fx-background-color: black;">
             <children>
-                <Label layoutX="22.0" layoutY="8.0" prefHeight="35.0" prefWidth="199.0" text="Notifications">
+                <Label layoutX="22.0" layoutY="8.0" prefHeight="35.0" prefWidth="199.0" text="Notifications" textFill="WHITE">
                     <font>
                         <Font name="Calibri Bold" size="20.0" />
                     </font>

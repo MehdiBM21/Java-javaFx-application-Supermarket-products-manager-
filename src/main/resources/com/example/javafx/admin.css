@@ -210,3 +210,24 @@
 .refresh_button:pressed{
     -fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #6200f4 0.0%, #dd00ff 0.6729%, #ff0090 43.6484%, #ff0009 72.2746%, #e74e55 100.0%);
 }
+#home_pane #DBCategories_container Button {
+    -fx-background-color: linear-gradient(#5EC5D4, #9B5FC0);
+    -fx-background-radius: 6px;
+    -fx-text-fill: white; /* Couleur du texte pour contraster avec le fond */
+    -fx-font-family: "roboto";
+    -fx-font-size: 14px;
+}
+
+#home_pane #DBCategories_container Button:pressed {
+    -fx-background-color: linear-gradient(#9B5FC0, #5EC5D4);
+}
+#lbl{
+    -fx-font-family: "roboto";
+    -fx-text-fill: white;
+}
+
+#home_pane #DBCategories_container Button:hover {
+    -fx-background-color: linear-gradient(#3A92A3, #834A9E);
+}
+
+

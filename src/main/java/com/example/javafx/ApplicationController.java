@@ -415,24 +415,7 @@ public class ApplicationController implements Initializable{
 
 
 
-//    private Callback<TableColumn<Produit, Void>, TableCell<Produit, Void>> createButtonCellFactory() {
-//        return new Callback<TableColumn<Produit, Void>, TableCell<Produit, Void>>() {
-//            @Override
-//            public TableCell<Produit, Void> call(final TableColumn<Produit, Void> param) {
-//                return new TableCell<Produit, Void>() {
-//                    private final Button modifierButton = new Button("Modifier");
-//                    private final Button supprimerButton = new Button("Supprimer");
-//
-//                    {
-//                        modifierButton.setOnAction(event -> {
-//                            Produit produit = getTableView().getItems().get(getIndex());
-//                            productId_modifier = produit.getId();
-//                            System.out.println("ID produit " + produit.getId());
-//                            modifier(produit);
-//                            modifier_label.setText("Modifier le Produit "+produit.getId());
-//                            // Logique pour la modification ici
-//                            System.out.println("Modifier produit avec l'ID : " + produit.getId());
-//                        });
+
 @FXML
 public void setup_table_ALLProducts(){
     MFXTableColumn<Produit> idColumnProduit = new MFXTableColumn<>("Id Produit", true, Comparator.comparing(Produit::getId));
@@ -484,33 +467,7 @@ public void setup_table_ALLProducts(){
         AllProducts_table.setItems(produitsList);
     }
 
-//                        supprimerButton.setOnAction(event -> {
-//                            Produit produit = getTableView().getItems().get(getIndex());
-//                            supprimerProduit(produit);
-//                            System.out.println("Supprimer produit avec l'ID : " + produit.getId());
-//                        });
-//                    }
-//
-//                    @Override
-//                    protected void updateItem(Void item, boolean empty) {
-//                        super.updateItem(item, empty);
-//
-//                        if (empty) {
-//                            setGraphic(null);
-//                        } else {
-//                            setGraphic(createButtonPane());
-//                        }
-//                    }
-//
-//                    private Pane createButtonPane() {
-//                        HBox buttonPane = new HBox(modifierButton, supprimerButton);
-//                        buttonPane.setSpacing(5);
-//                        return buttonPane;
-//                    }
-//                };
-//            }
-//        };
-//    }
+
 
     public void displayCategorie(String categorie){
         categorieLabel.setText("Catégorie: " + categorie);
@@ -544,8 +501,6 @@ public void setup_table_ALLProducts(){
                         "    -fx-padding: 0;");
                 icon.setFill(Color.web("#bd2626"));
                 supprimerUserButton.setGraphic(icon);
-//                supprimerUserButton.setId("delete_icon");
-//                supprimerUserButton.getStyleClass().add("produit.css");
                 supprimerUserButton.setOnAction(event -> {
                     supprimerUser(user);
                     System.out.println("Supprimer utilisateur avec l'ID : " + user.getId());
@@ -605,62 +560,7 @@ public void setup_table_ALLProducts(){
 
     }
 
-//    private void addActionsColumnEventHandlers() {
-//        // Assuming you have a column named "actionsColumn" in your FXML
-//        TableColumn<User, Void> actionsColumn = (TableColumn<User, Void>) usersTable.getColumns().stream()
-//                .filter(column -> "actionsColumn".equals(column.getId()))
-//                .findFirst()
-//                .orElse(null);
-//
-//        if (actionsColumn != null) {
-//            // Set up a cell factory for the actions column
-//            Callback<TableColumn<User, Void>, TableCell<User, Void>> cellFactory = (TableColumn<User, Void> param) -> {
-//                final TableCell<User, Void> cell = new TableCell<User, Void>() {
-//                    private final Button editButton = new Button("Modifier");
-//                    private final Button deleteButton = new Button("Supprimer");
-//
-//                    {
-//                        // Add an event handler to the "Modifier" button
-//                        editButton.setOnAction(event -> {
-//                            User user = getTableView().getItems().get(getIndex());
-//                            //Produit produit = getTableView().getItems().get(getIndex());
-//                            //productId_modifier = produit.getId();
-//                            //System.out.println("ID produit " + produit.getId());
-//                            userId_modifier = user.getId();
-//                            modifierUser(user);
-//                            modifierUser_label.setText("Modifier l'Utilisateur "+user.getId());
-//                            System.out.println("Modifier utilisateur avec l'ID : " + user.getId());
-//                        });
-//
-//                        // Add an event handler to the "Supprimer" button
-//                        deleteButton.setOnAction(event -> {
-//                            User user = getTableView().getItems().get(getIndex());
-//                            supprimerUser(user);
-//                            System.out.println("Supprimer utilisateur avec l'ID : " + user.getId());
-//                        });
-//
-//                        // Set the buttons as the graphic for the cell
-//                        setGraphic(new HBox(editButton, deleteButton));
-//                    }
-//
-//                    @Override
-//                    protected void updateItem(Void item, boolean empty) {
-//                        super.updateItem(item, empty);
-//
-//                        // Make sure the cell is empty
-//                        if (empty) {
-//                            setGraphic(null);
-//                        }
-//                    }
-//                };
-//
-//                return cell;
-//            };
-//
-//            // Set the custom cell factory for the actions column
-//            actionsColumn.setCellFactory(cellFactory);
-//        }
-//    }
+
 
 
     public void SignOut(ActionEvent event) throws IOException {
@@ -697,28 +597,14 @@ public void setup_table_ALLProducts(){
         addCategory_pane.toFront();
     }
 
-//    public void ValiderProduit(){
-//        String designation = designation_field.getText();
-//        int qte = Integer.parseInt(quantite_field.getText());
-//        float prix = Float.parseFloat(prix_field.getText());
-//        LocalDate date = date_field.getValue();
-//        LocalDate peremption = peremption_field.getValue();
-//        int categoryId = categorieNumber;
-//        Produit p = new Produit(categoryId, designation, qte, prix, date, peremption);
-//        produitsDao.add(p);
-//        products_pane.toFront();
-//        initializeProduits(categorieNumber);
-//
-//    }
+
     private Boolean rules(){
         String designation = designation_field.getText();
         String quantiteText = quantite_field.getText();
         String prixText = prix_field.getText();
         LocalDate date = date_field.getValue();
         int flag=0;
-        //LocalDate peremption = peremption_field.getValue();
 
-        // Validate Designation
         if (designation.isEmpty()) {
             designation_rule.setText("Vous devez fournir la designation du produit!");
             System.out.println("designation error");
@@ -1010,12 +896,11 @@ public void setup_table_ALLProducts(){
                 }catch(IOException e){
                     e.printStackTrace();
                 }
-                // Logique à exécuter lorsque le bouton de catégorie est cliqué
+
                 System.out.println("Catégorie sélectionnée : " + category);
-                // Ajoutez ici la logique pour afficher les produits de la catégorie sélectionnée, par exemple
+
             });
-            // Ajoutez le bouton à votre interface utilisateur, par exemple, à une VBox nommée "categoriesBox"
-//           DBCategories_container.getChildren().add(categoryButton);
+
            DBCategories_container.getChildren().addLast(categoryButton);
         }
         }

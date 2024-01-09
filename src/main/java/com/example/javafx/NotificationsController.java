@@ -34,7 +34,7 @@ public class NotificationsController implements Initializable {
     private AnchorPane topBar;
     private final ProduitDaoImpl produitsDao = new ProduitDaoImpl();
     private final HistoriqueDaoImpl hdao = new HistoriqueDaoImpl();
-//    File1Controller file1Controller=new File1Controller();
+
     public double x,y;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -55,28 +55,14 @@ public class NotificationsController implements Initializable {
     }
 
     public void Initialize_notifications( ){
-//        try {
+
             List<Produit> produits_expire=produitsDao.getAll().stream().filter(p ->p.getPeremption()!=null && p.getPeremption().isBefore(LocalDate.now())).collect(Collectors.toList());
-////
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("file1.fxml"));
-//            Parent root = loader.load();
-//            File1Controller file1Controller = loader.getController();
-//            file1Controller.notification_nbr.setText(Double.toString(produits_expire.stream().count()));
 
             notification_vbox.getChildren().clear();
-
-
             for(Produit produit:produits_expire){
-
                 notification_vbox.getChildren().add(createNotification(produit));
             }
-//
             notification_vbox.setSpacing(1);
-//        }
-//        catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-
 
     }
     public Node createNotification(Produit produit){

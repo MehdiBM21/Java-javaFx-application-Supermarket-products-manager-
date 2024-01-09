@@ -2,7 +2,6 @@ package Backend.Produit;
 
 import Backend.Dao.AbstractDao;
 import Backend.Dao.IProduitDao;
-import Backend.Dao.SingleConnection;
 import Backend.Historique.Historique;
 import Backend.Historique.HistoriqueDaoImpl;
 

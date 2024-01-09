@@ -1,11 +1,5 @@
 @import 'admin.css';
 
-/*.titles{*/
-/*    !*-fx-text-fill: -fx-labelColor;*!*/
-/*    -fx-font-size: 31px;*/
-/*    -fx-text-fill: -fx-textColor;*/
-
-/*}*/
 
 
 #produitSearch_field{
@@ -43,45 +37,6 @@
     -fx-font-family:"Arial";
 }
 
-/*.add-product-btn{*/
-/*    */
-/*    !*-fx-effect: dropshadow(gaussian,#000000,3px 3px, 5px);*!*/
-/*    -fx-background-color: rgb(143, 36, 243);*/
-/*    -fx-text-fill: -fx-textColor;*/
-/*    -fx-cursor: hand;*/
-/*    -fx-background-radius: 15px;*/
-/*    -fx-font-size: 17px;*/
-/*}*/
-
-/*.add-product-btn:hover{*/
-/*    -fx-translate-y: 4px;*/
-/*    -fx-translate-x: 4px;*/
-/*    -fx-effect: none;*/
-/*}*/
-
-/*  \\\\\\\\\\\\\\\\\   ajouter produit /////////////////////////////*/
-
-
-/*.mfx-text-field,.ajoutProduit-text-field,.mfx-date-picker  {*/
-/*    -fx-font-size:16px ;*/
-/*    -fx-font-weight: bold;*/
-/*    -fx-font-family:"Roboto";*/
-/*    -fx-border-width: 0 0 3px 0;*/
-
-/*    -fx-border-radius: 0;*/
-/*    -fx-text-fill: white;*/
-/*    -fx-background-color: transparent;*/
-
-
-
-/*}*/
-/*.mfx-text-field .floating-text,.ajoutProduit-text-field .floating-text ,.mfx-date-picker .floating-text{*/
-/*    -fx-background-color: transparent;*/
-
-/*    -fx-text-fill: #a9a9a9;*/
-
-/*}*/
-
 #peremption_field .icon,#date_field .icon,#modifierPeremption_field .icon ,#modifierDate_field .icon  {
     -mfx-color: white;
     -fx-cursor: hand;
@@ -94,31 +49,6 @@
 }
 
 
-
-/*.valider_ajoutProduit_buttons{*/
-/*    -fx-padding: 10px 13px 10px 13px;*/
-
-/*    -fx-font-size: 16px;*/
-/*    -fx-cursor: hand;*/
-/*    -fx-background-radius: 10px;*/
-/*}*/
-/*#annulerProduit_btn ,#annuler_modifier_Produit_btn{*/
-/*    -fx-background-color:#EE5C55 ;*/
-/*}*/
-/*#annulerProduit_btn:hover ,#annuler_modifier_Produit_btn:hover{*/
-/*    -fx-background-color:#E1221C ;*/
-/*    -fx-rotate: -2;*/
-/*}*/
-/*#valider_btn_produit ,#modifierValider_btn{*/
-/*    -fx-background-color: #004B88;*/
-/*}*/
-/*#valider_btn_produit:hover ,#modifierValider_btn:hover{*/
-/*    -fx-rotate:2 ;*/
-/*     -fx-background-color: #001546;*/
-/* }*/
-/*#valider_btn_produit:pressed ,#annulerProduit_btn:pressed ,#modifierValider_btn:pressed ,#annuler_modifier_Produit_btn:pressed{*/
-/*    -fx-background-color:linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #3cac3e 0.0%, #6fb14b 0.6729%, #0cc296 38.8084%, #1185c4 71.6016%, #4a51d1 100.0%)*/
-/*}*/
 #delete_icon,#edit_icon{
     -fx-background-color: transparent;
     -fx-padding: 0;

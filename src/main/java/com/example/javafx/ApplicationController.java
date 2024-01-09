@@ -12,13 +12,10 @@ import animatefx.animation.RotateIn;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import io.github.palexdev.materialfx.beans.NumberRange;
 import io.github.palexdev.materialfx.controls.*;
-import io.github.palexdev.materialfx.controls.cell.MFXDateCell;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import io.github.palexdev.materialfx.filter.DoubleFilter;
 import io.github.palexdev.materialfx.filter.IntegerFilter;
 import io.github.palexdev.materialfx.filter.StringFilter;
-import io.github.palexdev.materialfx.utils.DateTimeUtils;
-import io.github.palexdev.materialfx.utils.others.dates.DateStringConverter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,23 +28,22 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.YearMonth;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.function.Function;
 
 public class ApplicationController implements Initializable{
     private Parent root;
@@ -71,13 +67,7 @@ public class ApplicationController implements Initializable{
     private Scene scene;
     @FXML
     private AnchorPane topBar;
-    @FXML
-    private AnchorPane sideBar;
-    @FXML
-    private VBox sideBar_vbox;
 
-    @FXML
-    private AnchorPane content_pane;
     //produits pane variables
     @FXML
     MFXTableView<Produit> ProduitsTable,AllProducts_table;
@@ -162,11 +152,7 @@ public class ApplicationController implements Initializable{
         Button clickedButton = (Button) e.getSource();
         String buttonText = clickedButton.getText();
         categorieNumber = parseCategoryNumber(clickedButton.getId());
-        //ProduitDaoImpl dao = new ProduitDaoImpl();
-//        System.out.println(buttonText +"  "+categorieNumber);
-        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/javafx/produits.fxml"));
-        //root = loader.load();
-        //ProduitsController produitsController = loader.getController();
+
         ProduitsTable.getTableColumns().clear();
         ProduitsTable.getFilters().clear();
         setup_table_produit();
@@ -178,10 +164,7 @@ public class ApplicationController implements Initializable{
 
         displayCategorie(buttonText);
         products_pane.toFront();
-        //stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        //scene = new Scene(root);
-        //stage.setScene(scene);
-        //stage.show();
+
     }
     // Method to parse the category number from the button ID
     private int parseCategoryNumber(String buttonId) {
